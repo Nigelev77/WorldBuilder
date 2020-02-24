@@ -4,16 +4,21 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import io.PeripheralController;
+
 public class Window {
 	
 	private int width, height;
 	private String title;
 	private long window;
 	
+	private PeripheralController peripherals;
+	
 	public Window(int width, int height, String title) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
+		peripherals = new PeripheralController();
 	}
 	
 	public void createWindow() {
@@ -30,12 +35,18 @@ public class Window {
 		GLFWVidMode video = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
 		GLFW.glfwSetWindowPos(window, (video.width()-width)/2, (video.height()-height)/2);
 		GLFW.glfwShowWindow(window);
-		
+		setupInputCallbacks();
 	}
 	
 	public void createContext() {
 		GLFW.glfwMakeContextCurrent(window);
 		GL.createCapabilities();
 	}
-
+	
+	
+	private void setupInputCallbacks() {
+		GLFW.glfwSetKeyCallback(window, peripherals.getKeyboard());
+		GLFW.glfwSetMouseButtonCallback(window, peripherals.getMouseButtons());
+		GLFW.glfwSetCursorPosCallback(window, peripherals.getCursorPos());
+	}
 }
