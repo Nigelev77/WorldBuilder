@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-12">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="WorldBuilder/LWJGL3_lib/natives"/>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
@@ -59,5 +58,37 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="WorldBuilder/LWJGL3_lib/natives"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-assimp-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-bgfx-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-glfw-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-jemalloc-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-libdivide-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-llvm-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-lmdb-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-lz4-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-meow-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-nanovg-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-nfd-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-nuklear-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-openal-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-opengl-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-opengles-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-openvr-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-opus-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-ovr-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-par-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-remotery-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-rpmalloc-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-shaderc-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-sse-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-stb-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-tinyexr-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-tinyfd-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-tootle-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-vma-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-xxhash-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-yoga-natives-windows.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/natives/lwjgl-zstd-natives-windows.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

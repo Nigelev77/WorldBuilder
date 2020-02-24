@@ -11,6 +11,7 @@ public class Window {
 	private int width, height;
 	private String title;
 	private long window;
+	private boolean vsync = true;
 	
 	private PeripheralController peripherals;
 	
@@ -41,8 +42,24 @@ public class Window {
 	public void createContext() {
 		GLFW.glfwMakeContextCurrent(window);
 		GL.createCapabilities();
+		if(vsync) {
+			GLFW.glfwSwapInterval(1);
+		}
 	}
 	
+	public void update() {
+		GLFW.glfwPollEvents();
+		swapBuffers();
+	}
+	
+	public void swapBuffers() {
+		GLFW.glfwSwapBuffers(window);
+	}
+	
+	
+	public long getWindow() {
+		return window;
+	}
 	
 	private void setupInputCallbacks() {
 		GLFW.glfwSetKeyCallback(window, peripherals.getKeyboard());
