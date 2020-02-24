@@ -25,4 +25,9 @@ public class PeripheralController {
 		return mouse.getCursorPos();
 	}
 	
+	public void destroy() {
+		keyboard.destroy();
+		mouse.destroy();
+	}
+	
 }

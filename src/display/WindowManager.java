@@ -31,4 +31,8 @@ public class WindowManager {
 		return window.getWindow();
 	}
 	
+	public void destroy() {
+		window.destroy();
+	}
+	
 }

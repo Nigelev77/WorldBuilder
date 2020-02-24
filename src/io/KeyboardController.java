@@ -12,7 +12,7 @@ public class KeyboardController{
 			
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
-				System.out.println(GLFW.glfwGetKeyName(key, scancode));
+				//System.out.println(GLFW.glfwGetKeyName(key, scancode));
 				
 			}
 		};
@@ -23,5 +23,8 @@ public class KeyboardController{
 		return keyboard;
 	}
 	
+	public void destroy() {
+		keyboard.free();
+	}
 	
 }

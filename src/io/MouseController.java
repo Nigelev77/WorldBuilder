@@ -14,7 +14,7 @@ public class MouseController{
 			
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				System.out.println(GLFW.glfwGetMouseButton(window, button));
+				//System.out.println(GLFW.glfwGetMouseButton(window, button));
 				
 			}
 		};
@@ -22,7 +22,7 @@ public class MouseController{
 			
 			@Override
 			public void invoke(long window, double xpos, double ypos) {
-				System.out.println(xpos+" "+ypos);
+				//System.out.println(xpos+" "+ypos);
 				
 			}
 		};
@@ -34,6 +34,11 @@ public class MouseController{
 	
 	public GLFWCursorPosCallback getCursorPos() {
 		return cursorPos;
+	}
+	
+	public void destroy() {
+		mouseButtons.free();
+		cursorPos.free();
 	}
 
 }

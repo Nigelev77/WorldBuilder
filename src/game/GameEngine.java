@@ -10,6 +10,10 @@ public class GameEngine implements Runnable{
 	
 	private WindowManager windows;
 	
+	public static boolean isRunning = true;
+	
+	public static Object glfwLock = new Object();
+	
 	public GameEngine() {
 		
 		windows = new WindowManager();
@@ -21,17 +25,29 @@ public class GameEngine implements Runnable{
 	}
 	
 	private void init() {
+		windows.createWindow();
+		startGameLoop();
+		while(!GLFW.glfwWindowShouldClose(windows.getWindowNum())) {
+			GLFW.glfwWaitEvents();
+		}
+		synchronized(GameEngine.glfwLock) {
+			isRunning = false;
+			windows.destroy();
+		}
+	}
+	private void startGameLoop() {
 		gameLoopThread.start();
 	}
+
 	
 	
 	@Override
 	public void run() {
-		windows.createWindow();
 		windows.createContext();
-		while(!GLFW.glfwWindowShouldClose(windows.getWindowNum())) {
+		while(GameEngine.isRunning) {
 			windows.update();
 		}
+
 		
 	}
 	

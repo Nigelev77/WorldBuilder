@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import game.GameEngine;
 import io.PeripheralController;
 
 public class Window {
@@ -48,8 +49,18 @@ public class Window {
 	}
 	
 	public void update() {
-		GLFW.glfwPollEvents();
-		swapBuffers();
+		
+		synchronized(GameEngine.glfwLock) {
+			if(GameEngine.isRunning) {
+				swapBuffers();
+			}
+		}
+
+	}
+	public void destroy() {
+		peripherals.destroy();
+		System.out.println(Thread.currentThread().getName());
+		GLFW.glfwDestroyWindow(window);
 	}
 	
 	public void swapBuffers() {
