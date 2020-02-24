@@ -2,6 +2,7 @@ package display;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
 
 public class Window {
 	
@@ -30,6 +31,11 @@ public class Window {
 		GLFW.glfwSetWindowPos(window, (video.width()-width)/2, (video.height()-height)/2);
 		GLFW.glfwShowWindow(window);
 		
+	}
+	
+	public void createContext() {
+		GLFW.glfwMakeContextCurrent(window);
+		GL.createCapabilities();
 	}
 
 }
