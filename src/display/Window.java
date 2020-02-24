@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import engine.RenderEngine;
 import game.GameEngine;
 import io.PeripheralController;
 
@@ -49,7 +50,7 @@ public class Window {
 	}
 	
 	public void update() {
-		
+		RenderEngine.render();
 		synchronized(GameEngine.glfwLock) {
 			if(GameEngine.isRunning) {
 				swapBuffers();

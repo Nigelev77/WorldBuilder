@@ -3,8 +3,11 @@ package game;
 import org.lwjgl.glfw.GLFW;
 
 import display.WindowManager;
+import engine.RenderEngine;
 
 public class GameEngine implements Runnable{
+	
+	//With inspiration from Kai Burjack from repo https://github.com/LWJGL/lwjgl3-demos/blob/master/src/org/lwjgl/demo/opengl/glfw/Multithreaded.java for the synchronized object idea!
 	
 	private final Thread gameLoopThread;
 	
@@ -44,6 +47,7 @@ public class GameEngine implements Runnable{
 	@Override
 	public void run() {
 		windows.createContext();
+		RenderEngine.init();
 		while(GameEngine.isRunning) {
 			windows.update();
 		}
