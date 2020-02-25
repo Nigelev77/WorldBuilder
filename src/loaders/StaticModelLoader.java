@@ -4,7 +4,7 @@ package loaders;
 public class StaticModelLoader {
 	
 	
-	public void loadEntity() {
+	public static void loadEntity(String fileName) {
 		
 	}
 }
