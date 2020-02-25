@@ -6,10 +6,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.FloatBuffer;
 
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL32;
+
 
 
 public abstract class Shader {
@@ -27,13 +33,21 @@ public abstract class Shader {
 		bindAttributes();
 		GL20.glLinkProgram(programID);
 		GL20.glValidateProgram(programID);
+		getAllUniformLocations();
 		
 	}
 	
+	protected abstract void getAllUniformLocations();
 	protected abstract void bindAttributes();
 	
 	protected void bindAttribute(int index, String inVariable) {
 		GL20.glBindAttribLocation(programID, index, inVariable);
+	}
+	
+	protected abstract void connectTextureUnits();
+	
+	protected int getUniformLocation(String uniformName) {
+		return GL20.glGetUniformLocation(programID, uniformName);
 	}
 	
 	private int compileShader(String shaderSource, int shaderType) {
@@ -67,6 +81,34 @@ public abstract class Shader {
 		return shader;
 	}
 	
+	protected void loadInt(int location, int value) {
+		GL20.glUniform1i(location, value);
+	}
 	
+	protected void loadFloat(int location, float value) {
+		GL20.glUniform1f(location, value);
+	}
 	
+	protected void loadBoolean(int location, boolean value) {
+		if(value) {
+			GL20.glUniform1f(location, 1f);
+		}else {
+			GL20.glUniform1f(location, 0f);
+		}
+	}
+	
+	protected void loadVector2f(int location, Vector2f vec) {
+		GL20.glUniform2f(location, vec.x, vec.y);
+	}
+	
+	protected void loadVector3f(int location, Vector3f vec) {
+		GL20.glUniform3f(location, vec.x, vec.y, vec.z);
+	}
+	
+	protected void loadMatrix4f(int location, Matrix4f mat) {
+		FloatBuffer buffer = BufferUtils.createFloatBuffer(16);
+		mat.get(0, buffer);
+		buffer.flip();
+		GL20.glUniformMatrix4fv(location, false, buffer);
+	}
 }

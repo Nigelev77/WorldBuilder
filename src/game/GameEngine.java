@@ -48,13 +48,15 @@ public class GameEngine implements Runnable{
 	public void run() {
 		windows.createContext();
 		RenderEngine.init();
-		while(GameEngine.isRunning) {
-			windows.update();
-		}
-
+		gameLoop();
 		
 	}
 	
+	private void gameLoop() {
+		while(GameEngine.isRunning) {
+			windows.update();
+		}
+	}
 	
 	
 }
