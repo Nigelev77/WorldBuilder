@@ -17,9 +17,12 @@ public class MasterRenderer {
 	
 	public MasterRenderer() {
 		shader = new StaticModelShader();
+		shader.Start();
+		shader.Stop();
 	}
 	
 	public void render() {
+		shader.Start();
 		prepare();
 		for(StaticModel model:statics) {
 			prepareModel(model);
@@ -30,21 +33,19 @@ public class MasterRenderer {
 	}
 	
 	private void endRendering() {
-		shader.stop();
+		shader.Stop();
 	}
 	
 	private void finish() {
 		GL30.glBindVertexArray(0);
-		
 	}
 	
 	private void prepare() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-		GL11.glClearColor(1, 1, 0, 1);
+		GL11.glClearColor(1, 0, 0, 1);
 	}
 	
 	private void prepareModel(StaticModel model) {
-		shader.start();
 		GL30.glBindVertexArray(model.getVaoId());
 	}
 	

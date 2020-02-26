@@ -30,9 +30,5 @@ public class StaticModelShader extends Shader{
 
 
 
-	@Override
-	protected void connectTextureUnits() {
-		
-	}
 
 }

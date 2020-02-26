@@ -20,9 +20,10 @@ public class RenderEngine {
 	}
 	
 	public static void loadStaticModel(String fileName) {
-		//StaticModel model = loader.renderStaticModel("res/"+fileName+".obj");
-		//renderer.loadStaticModel(model);
+		StaticModel model = loader.renderStaticModel("res/"+fileName+".obj");
+		renderer.loadStaticModel(model);
 		System.out.println("Successful");
+		
 		Vao vao = new Vao();
 		float[] vertices = {
 				-0.5f, 0.5f, 0f,//v0
@@ -38,6 +39,7 @@ public class RenderEngine {
 		vao.storeData(indices, dimensions, vertices);
 		StaticModel rect = new StaticModel(vao);
 		renderer.loadStaticModel(rect);
+		
 	}
 	
 }

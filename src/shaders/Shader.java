@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
@@ -14,8 +15,7 @@ import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
-import org.lwjgl.opengl.GL32;
+
 
 
 
@@ -26,9 +26,10 @@ public abstract class Shader {
 	private int fragmentID;
 	
 	public Shader(String vertexFile, String fragmentFile) {
-		int programID = GL32.glCreateProgram();
-		vertexID = compileShader(vertexFile, GL32.GL_VERTEX_SHADER);
-		fragmentID = compileShader(fragmentFile, GL32.GL_FRAGMENT_SHADER);
+
+		vertexID = compileShader(vertexFile, GL20.GL_VERTEX_SHADER);
+		fragmentID = compileShader(fragmentFile, GL20.GL_FRAGMENT_SHADER);
+		programID = GL20.glCreateProgram();
 		GL20.glAttachShader(programID, vertexID);
 		GL20.glAttachShader(programID, fragmentID);
 		bindAttributes();
@@ -39,12 +40,13 @@ public abstract class Shader {
 	}
 	
 	
-	public void start() {
-		GL30.glUseProgram(programID);
+	public void Start() {
+		System.out.println("starting");
+		GL20.glUseProgram(programID);
 	}
 	
-	public void stop() {
-		GL30.glUseProgram(0);
+	public void Stop() {
+		GL20.glUseProgram(0);
 	}
 	
 	protected abstract void getAllUniformLocations();
@@ -54,7 +56,6 @@ public abstract class Shader {
 		GL20.glBindAttribLocation(programID, index, inVariable);
 	}
 	
-	protected abstract void connectTextureUnits();
 	
 	protected int getUniformLocation(String uniformName) {
 		return GL20.glGetUniformLocation(programID, uniformName);
@@ -63,17 +64,13 @@ public abstract class Shader {
 	private int compileShader(String shaderSource, int shaderType) {
 		StringBuilder source = new StringBuilder();
 		try {
-			FileInputStream file = new FileInputStream(new File(shaderSource));
-			InputStreamReader stream = new InputStreamReader(file);
-			BufferedReader reader = new BufferedReader(stream);
+			BufferedReader reader = new BufferedReader(new FileReader(shaderSource));
 			String line;
 			while((line=reader.readLine())!=null) {
-				source.append(line+"\n");
+				source.append(line).append("\n");
 			}
 			
 			reader.close();
-			stream.close();
-			file.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

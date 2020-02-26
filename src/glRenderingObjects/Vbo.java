@@ -52,17 +52,13 @@ public class Vbo {
 		for(int i: dimensions) {
 			totalPrimitives+=i;
 		}
-		for(int vertex = 0; vertex<vertexCount/totalPrimitives;vertex++) { /////////////RUNTIME ERROR SOMEWHERE IN THESE NESTED FOR LOOPS, NEED TO INVESTIGATE PLZ
+		for(int vertex = 0; vertex<totalFloats/totalPrimitives;vertex++) { /////////////RUNTIME ERROR SOMEWHERE IN THESE NESTED FOR LOOPS, NEED TO INVESTIGATE PLZ
 			for(int attributeList = 0; attributeList<data.length;attributeList++) {
 				for(int k = 0; k<dimensions[attributeList]; k++) {
 					interleavedData[pointer++] = data[attributeList][elements[attributeList]++];
 				}
 			}
 		}
-		for(float dataPoint:interleavedData) {
-			System.out.println(dataPoint);
-		}
-		System.out.println("done");
 		masterBuffer.put(interleavedData);
 		masterBuffer.flip();
 		vboID = GL20.glGenBuffers();

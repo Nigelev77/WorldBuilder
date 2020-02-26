@@ -79,9 +79,6 @@ public class SingleFaceWaveFrontLoader {
 		int[] dimensions = {3,2,3};
 		Vao vao = new Vao();
 		vao.storeData(indicesArr, dimensions, verticesArr, textureCoordsArr, normalsArr);
-		for(float textureCoord:textureCoordsArr) {
-			System.out.println(textureCoord);
-		}
 		return vao;
 		
 	}

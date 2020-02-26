@@ -37,7 +37,6 @@ public class Vao {
 		GL30.glBindVertexArray(vaoID);
 		for(int i =0;i<dataLength;i++) {
 			GL30.glEnableVertexAttribArray(i);
-			System.out.println(i);
 		}
 		GL30.glBindVertexArray(0);
 	}
