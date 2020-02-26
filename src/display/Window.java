@@ -1,8 +1,10 @@
 package display;
 
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 
 import engine.RenderEngine;
 import game.GameEngine;
@@ -39,6 +41,7 @@ public class Window {
 		GLFW.glfwSetWindowPos(window, (video.width()-width)/2, (video.height()-height)/2);
 		GLFW.glfwShowWindow(window);
 		setupInputCallbacks();
+		setFrameBufferCallbacks();
 	}
 	
 	public void createContext() {
@@ -77,5 +80,18 @@ public class Window {
 		GLFW.glfwSetKeyCallback(window, peripherals.getKeyboard());
 		GLFW.glfwSetMouseButtonCallback(window, peripherals.getMouseButtons());
 		GLFW.glfwSetCursorPosCallback(window, peripherals.getCursorPos());
+	}
+	
+	private void setFrameBufferCallbacks() {
+		GLFWFramebufferSizeCallback frameBufferCallback = new GLFWFramebufferSizeCallback() {
+			@Override
+			public void invoke(long window, int width, int height) {
+				Window.this.width = width;
+				Window.this.height = height;
+				GL11.glViewport(0, 0, width, height);
+				
+			}
+		};
+		GLFW.glfwSetFramebufferSizeCallback(window, frameBufferCallback);
 	}
 }

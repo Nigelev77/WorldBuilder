@@ -1,10 +1,11 @@
 package loaders;
 
+import models.StaticModel;
+
 public class MasterLoader {
 	
-	private 
 	
-	public MasterLoader() {
-		
+	public StaticModel renderStaticModel(String fileName) {
+		return new StaticModel(SingleFaceWaveFrontLoader.loadEntity(fileName));
 	}
 }

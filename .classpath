@@ -6,7 +6,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-assimp.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-assimp.jar" sourcepath="LWJGL3_lib/src/lwjgl-assimp-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WorldBuilder/LWJGL3_lib/javadoc/lwjgl-assimp-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-bgfx.jar"/>
 	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-cuda.jar"/>
 	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-egl.jar"/>

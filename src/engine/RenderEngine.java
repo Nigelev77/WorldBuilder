@@ -1,5 +1,8 @@
 package engine;
 
+import loaders.MasterLoader;
+import models.StaticModel;
+
 public class RenderEngine {
 	
 	private static MasterRenderer renderer;
@@ -10,7 +13,12 @@ public class RenderEngine {
 	}
 	
 	public static void render() {
+		
 		renderer.render();
+	}
+	
+	public static void loadStaticModel(String fileName) {
+		StaticModel model = loader.renderStaticModel("res/"+fileName+".obj");
 	}
 	
 }
