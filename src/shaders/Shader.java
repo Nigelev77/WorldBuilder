@@ -14,6 +14,7 @@ import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GL32;
 
 
@@ -35,6 +36,15 @@ public abstract class Shader {
 		GL20.glValidateProgram(programID);
 		getAllUniformLocations();
 		
+	}
+	
+	
+	public void start() {
+		GL30.glUseProgram(programID);
+	}
+	
+	public void stop() {
+		GL30.glUseProgram(0);
 	}
 	
 	protected abstract void getAllUniformLocations();

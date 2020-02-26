@@ -1,0 +1,11 @@
+#version 400 core
+
+in vec4 outColour;
+
+out vec4 Colour;
+
+void main(void){
+	Colour = vec4(1.0,1.0,0.0,1.0);
+
+
+}

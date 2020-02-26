@@ -46,15 +46,23 @@ public class Vbo {
 	}
 	
 	private void storeInterleavedData(int[] dimensions, int[] elements, float[]... data) {
-		float[] interleavedData = new float[vertexCount];
+		float[] interleavedData = new float[totalFloats];
 		int pointer = 0;
-		for(int vertex = 0; vertex<vertexCount;vertex++) {
+		int totalPrimitives = 0;
+		for(int i: dimensions) {
+			totalPrimitives+=i;
+		}
+		for(int vertex = 0; vertex<vertexCount/totalPrimitives;vertex++) { /////////////RUNTIME ERROR SOMEWHERE IN THESE NESTED FOR LOOPS, NEED TO INVESTIGATE PLZ
 			for(int attributeList = 0; attributeList<data.length;attributeList++) {
 				for(int k = 0; k<dimensions[attributeList]; k++) {
 					interleavedData[pointer++] = data[attributeList][elements[attributeList]++];
 				}
 			}
 		}
+		for(float dataPoint:interleavedData) {
+			System.out.println(dataPoint);
+		}
+		System.out.println("done");
 		masterBuffer.put(interleavedData);
 		masterBuffer.flip();
 		vboID = GL20.glGenBuffers();
@@ -67,7 +75,6 @@ public class Vbo {
 		for(int i:dimensions) {
 			size+=i;
 		}
-		size*=FLOAT;
 	}
 	
 	private void findTotalFloats(float[]...data) {

@@ -48,6 +48,7 @@ public class GameEngine implements Runnable{
 	public void run() {
 		windows.createContext();
 		RenderEngine.init();
+		RenderEngine.loadStaticModel("cube");
 		gameLoop();
 		
 	}
