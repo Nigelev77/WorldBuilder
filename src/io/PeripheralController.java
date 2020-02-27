@@ -6,8 +6,8 @@ import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
 public class PeripheralController {
 	
-	private KeyboardController keyboard;
-	private MouseController mouse;
+	public KeyboardController keyboard;
+	public MouseController mouse;
 	
 	public PeripheralController() {
 		keyboard = new KeyboardController();

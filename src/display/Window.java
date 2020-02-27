@@ -16,6 +16,7 @@ public class Window {
 	private String title;
 	private long window;
 	private boolean vsync = true;
+	private boolean resized = false;
 	
 	private PeripheralController peripherals;
 	
@@ -53,6 +54,10 @@ public class Window {
 	}
 	
 	public void update() {
+		if(resized) {
+			GL11.glViewport(0, 0, width, height);
+			setResized(false);
+		}
 		RenderEngine.render();
 		synchronized(GameEngine.glfwLock) {
 			if(GameEngine.isRunning) {
@@ -89,9 +94,18 @@ public class Window {
 				Window.this.width = width;
 				Window.this.height = height;
 				GL11.glViewport(0, 0, width, height);
-				
+				setResized(true);
+					
 			}
 		};
 		GLFW.glfwSetFramebufferSizeCallback(window, frameBufferCallback);
+	}
+	
+	public void setResized(boolean resized) {
+		this.resized = resized;
+	}
+	
+	public PeripheralController getPeripherals() {
+		return peripherals;
 	}
 }

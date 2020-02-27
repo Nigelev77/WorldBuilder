@@ -1,6 +1,8 @@
 package io;
 
-import org.lwjgl.glfw.GLFW;
+import org.joml.Vector2d;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
@@ -8,6 +10,9 @@ public class MouseController{
 	
 	private GLFWMouseButtonCallback mouseButtons;
 	private GLFWCursorPosCallback cursorPos;
+	
+	private Vector2d mouse = new Vector2d(0,0);
+	private Vector3f mousef = new Vector3f(0,0,0);
 	
 	public MouseController() {
 		mouseButtons = new GLFWMouseButtonCallback() {
@@ -22,7 +27,8 @@ public class MouseController{
 			
 			@Override
 			public void invoke(long window, double xpos, double ypos) {
-				//System.out.println(xpos+" "+ypos);
+				mouse.x+=xpos;
+				mouse.y+=ypos;
 				
 			}
 		};
@@ -40,5 +46,11 @@ public class MouseController{
 		mouseButtons.free();
 		cursorPos.free();
 	}
+	public Vector3f getMousePos() {
+		mousef.x = (float) mouse.x;
+		mousef.y = (float) mouse.y;
+		return mousef;
+	}
+	
 
 }

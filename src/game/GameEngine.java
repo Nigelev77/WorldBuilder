@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFW;
 
 import display.WindowManager;
 import engine.RenderEngine;
+import player.Camera;
 
 public class GameEngine implements Runnable{
 	
@@ -11,7 +12,7 @@ public class GameEngine implements Runnable{
 	
 	private final Thread gameLoopThread;
 	
-	private WindowManager windows;
+	public static WindowManager windows;
 	
 	public static boolean isRunning = true;
 	
@@ -46,9 +47,7 @@ public class GameEngine implements Runnable{
 	
 	@Override
 	public void run() {
-		windows.createContext();
-		RenderEngine.init();
-		RenderEngine.loadStaticModel("cube");
+
 		gameLoop();
 		
 	}
@@ -57,6 +56,14 @@ public class GameEngine implements Runnable{
 		while(GameEngine.isRunning) {
 			windows.update();
 		}
+	}
+	
+	private void setup() {
+		windows.createContext();
+		RenderEngine.init();
+		RenderEngine.loadStaticModel("cube");
+		Camera camera = new Camera();
+		
 	}
 	
 	

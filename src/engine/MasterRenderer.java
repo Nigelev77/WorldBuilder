@@ -16,6 +16,7 @@ public class MasterRenderer {
 	private List<StaticModel> statics = new ArrayList<StaticModel>();
 	private StaticModelShader shader;
 	
+	
 	public MasterRenderer() {
 		shader = new StaticModelShader();
 		shader.Start();

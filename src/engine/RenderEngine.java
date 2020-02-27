@@ -16,7 +16,6 @@ public class RenderEngine {
 	}
 	
 	public static void render() {
-		
 		renderer.render();
 	}
 	
