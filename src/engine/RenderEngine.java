@@ -12,6 +12,7 @@ public class RenderEngine {
 	public static void init() {
 		renderer = new MasterRenderer();
 		loader = new MasterLoader();
+		shaders.TypeLoader.init();
 	}
 	
 	public static void render() {

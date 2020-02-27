@@ -21,9 +21,9 @@ import org.lwjgl.opengl.GL20;
 
 public abstract class Shader {
 	
-	private int programID;
-	private int vertexID;
-	private int fragmentID;
+	protected int programID;
+	protected int vertexID;
+	protected int fragmentID;
 	
 	public Shader(String vertexFile, String fragmentFile) {
 

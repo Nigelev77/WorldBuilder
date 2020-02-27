@@ -3,6 +3,7 @@ package engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL30;
@@ -18,6 +19,7 @@ public class MasterRenderer {
 	public MasterRenderer() {
 		shader = new StaticModelShader();
 		shader.Start();
+		shader.projectionMatrix.loadValue(new Matrix4f(), shader);
 		shader.Stop();
 	}
 	
