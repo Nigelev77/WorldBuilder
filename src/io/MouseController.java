@@ -28,7 +28,7 @@ public class MouseController{
 			@Override
 			public void invoke(long window, double xpos, double ypos) {
 				mouse.x+=xpos;
-				mouse.y+=ypos;
+				mouse.y+=ypos;//
 				
 			}
 		};
