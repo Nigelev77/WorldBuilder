@@ -41,7 +41,6 @@ public abstract class Shader {
 	
 	
 	public void Start() {
-		System.out.println("starting");
 		GL20.glUseProgram(programID);
 	}
 	
@@ -114,8 +113,7 @@ public abstract class Shader {
 	
 	protected void loadMatrix4f(int location, Matrix4f mat) {
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(16);
-		mat.get(0, buffer);
-		buffer.flip();
+		mat.get(buffer);
 		GL20.glUniformMatrix4fv(location, false, buffer);
 	}
 }

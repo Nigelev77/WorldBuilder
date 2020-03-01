@@ -93,8 +93,10 @@ public class Window {
 			public void invoke(long window, int width, int height) {
 				Window.this.width = width;
 				Window.this.height = height;
-				GL11.glViewport(0, 0, width, height);
 				setResized(true);
+				WindowManager.HEIGHT = height;
+				WindowManager.WIDTH = width;
+				WindowManager.aspectRatio = width/height;
 					
 			}
 		};

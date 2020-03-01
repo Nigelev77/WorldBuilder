@@ -7,8 +7,8 @@ public class Uniform<Type> {
 	Type type;
 	private int location;
 	
-	public Uniform(String name, int programID){
-		location = GL20.glGetUniformLocation(programID, name);
+	public Uniform(String name, Shader shader){
+		location = shader.getUniformLocation(name);
 	}
 	
 	public void loadValue(Type type, Shader shader) {

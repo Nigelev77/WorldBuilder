@@ -1,13 +1,16 @@
 package engine;
 
+import game.GameEngine;
 import glRenderingObjects.Vao;
 import loaders.MasterLoader;
 import models.StaticModel;
+import player.Camera;
 
 public class RenderEngine {
 	
 	private static MasterRenderer renderer;
 	private static MasterLoader loader;
+
 	
 	public static void init() {
 		renderer = new MasterRenderer();
@@ -16,7 +19,9 @@ public class RenderEngine {
 	}
 	
 	public static void render() {
-		renderer.render();
+		synchronized(GameEngine.camera) {
+			renderer.render(GameEngine.camera);
+		}
 	}
 	
 	public static void loadStaticModel(String fileName) {

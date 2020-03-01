@@ -18,6 +18,8 @@ public class GameEngine implements Runnable{
 	
 	public static Object glfwLock = new Object();
 	
+	public static volatile Camera camera;
+	
 	public GameEngine() {
 		
 		windows = new WindowManager();
@@ -30,8 +32,10 @@ public class GameEngine implements Runnable{
 	
 	private void init() {
 		windows.createWindow();
+		camera = new Camera();
 		startGameLoop();
 		while(!GLFW.glfwWindowShouldClose(windows.getWindowNum())) {
+			camera.move();
 			GLFW.glfwWaitEvents();
 		}
 		synchronized(GameEngine.glfwLock) {
@@ -53,7 +57,9 @@ public class GameEngine implements Runnable{
 	}
 	
 	private void gameLoop() {
+		setup();
 		while(GameEngine.isRunning) {
+			
 			windows.update();
 		}
 	}
@@ -62,7 +68,6 @@ public class GameEngine implements Runnable{
 		windows.createContext();
 		RenderEngine.init();
 		RenderEngine.loadStaticModel("cube");
-		Camera camera = new Camera();
 		
 	}
 	

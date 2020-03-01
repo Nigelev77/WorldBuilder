@@ -7,7 +7,8 @@ public class StaticModelShader extends Shader{
 	private static final String VERTEX_FILE = "shaders/staticVertex";
 	private static final String FRAGMENT_FILE = "shaders/staticFragment";
 	
-	public Uniform<Matrix4f> projectionMatrix = new Uniform<Matrix4f>("projectionMatrix", programID);
+	public Uniform<Matrix4f> projectionMatrix;
+	public Uniform<Matrix4f> viewMatrix;
 	
 	
 	
@@ -19,8 +20,8 @@ public class StaticModelShader extends Shader{
 
 	@Override
 	protected void getAllUniformLocations() {
-		
-		
+		projectionMatrix = new Uniform<Matrix4f>("projectMatrix", this);
+		viewMatrix = new Uniform<Matrix4f>("viewMatrix", this);
 	}
 
 

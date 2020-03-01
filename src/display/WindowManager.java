@@ -3,6 +3,7 @@ package display;
 public class WindowManager {
 	
 	public static int WIDTH = 1600, HEIGHT = 900;
+	public static int aspectRatio = WIDTH/HEIGHT;
 	
 	
 	private Window window;
@@ -34,5 +35,7 @@ public class WindowManager {
 	public void destroy() {
 		window.destroy();
 	}
+	
+	
 	
 }

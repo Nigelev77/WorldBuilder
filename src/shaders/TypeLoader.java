@@ -13,7 +13,9 @@ public enum TypeLoader {
 	private static List<String> types = new ArrayList<String>(values().length);
 	
 	public static void init() {
-		types.forEach(n-> types.add(types.indexOf(n), values()[types.indexOf(n)].toString()));
+		for(int i=0;i<values().length;i++) {
+			types.add(i, values()[i].toString());
+		}
 	}
 	public static <Type> void loadType(Type type, int location, Shader shader) {
 		int uniformType = types.indexOf(type.getClass().getSimpleName());

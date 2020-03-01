@@ -5,7 +5,7 @@ in vec4 outColour;
 out vec4 out_Colour;
 
 void main(void){
-	out_Colour = outColour;
+	out_Colour = vec4(1.0);
 
 
 }
