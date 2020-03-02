@@ -12,6 +12,7 @@ public class MouseController{
 	private GLFWCursorPosCallback cursorPos;
 	
 	private Vector2d mouse = new Vector2d(0,0);
+	private Vector2d deltaPos = new Vector2d(0,0);
 	private Vector3f mousef = new Vector3f(0,0,0);
 	
 	public MouseController() {
@@ -27,8 +28,10 @@ public class MouseController{
 			
 			@Override
 			public void invoke(long window, double xpos, double ypos) {
-				mouse.x+=xpos;
-				mouse.y+=ypos;//
+				deltaPos.x = xpos - mouse.x;
+				deltaPos.y = ypos - mouse.y;
+				mouse.x=xpos;
+				mouse.y=ypos;
 				
 			}
 		};
@@ -47,8 +50,8 @@ public class MouseController{
 		cursorPos.free();
 	}
 	public Vector3f getMousePos() {
-		mousef.x = (float) mouse.x;
-		mousef.y = (float) mouse.y;
+		mousef.x = (float) (deltaPos.y);
+		mousef.y = (float) (deltaPos.x);
 		return mousef;
 	}
 	

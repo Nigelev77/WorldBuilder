@@ -11,7 +11,8 @@ public class Maths {
 	public static final Vector3f posY = new Vector3f(0,1,0);
 	public static final Vector3f posZ = new Vector3f(0,0,1);
 	public static final float FOV = 70f;
-	private static final float NEAR_PLANE = 0.1f;
+	public static final float NEAR_PLANE = 0.1f;
+	public static final float FAR_PLANE = 700f;
 	
 	
 	public static void setProjectionAndView(Matrix4f viewMatrix, Matrix4f projection, Camera camera) {

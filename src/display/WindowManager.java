@@ -4,7 +4,7 @@ public class WindowManager {
 	
 	public static int WIDTH = 1600, HEIGHT = 900;
 	public static int aspectRatio = WIDTH/HEIGHT;
-	
+	public static boolean shouldClose = false;
 	
 	private Window window;
 	
@@ -36,6 +36,8 @@ public class WindowManager {
 		window.destroy();
 	}
 	
-	
+	public static void toClose() {
+		shouldClose = true;
+	}
 	
 }

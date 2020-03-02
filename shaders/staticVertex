@@ -9,7 +9,7 @@ uniform mat4 viewMatrix;
 
 void main(void){
 	
-	gl_Position =viewMatrix*vec4(vertex_position, 1.0);
+	gl_Position =projectMatrix*viewMatrix*vec4(vertex_position, 1.0);
 	//gl_Position = vec4(vertex_position.xy, vertex_position.z-0.5f, 1.0);
 	outColour = vec4(vertex_position, 1.0);
 }

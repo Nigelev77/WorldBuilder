@@ -29,13 +29,11 @@ public class Camera {
 	
 	public void move() {
 		rotations.add(peripherals.mouse.getMousePos());
-		rotations.x = Math.max(360, rotations.x);
-		rotations.x = Math.min(0, rotations.x);
-		rotations.y = Math.min(0, rotations.y);
-		rotations.y = Math.max(360, rotations.y);
-		//System.out.println(rotations.toString());
+		rotations.x = rotations.x%360;
+		rotations.y = rotations.y%360;
+		//System.out.println(rotations.x+" "+rotations.y);
 		position.add(peripherals.keyboard.updatePos(rotations.x, rotations.y));
-		System.out.println(position.toString());
+		System.out.println(position.x+" "+position.y+" "+position.z);
 	}
 
 }

@@ -43,6 +43,7 @@ public class Window {
 		GLFW.glfwShowWindow(window);
 		setupInputCallbacks();
 		setFrameBufferCallbacks();
+		
 	}
 	
 	public void createContext() {
@@ -57,6 +58,9 @@ public class Window {
 		if(resized) {
 			GL11.glViewport(0, 0, width, height);
 			setResized(false);
+		}
+		if(WindowManager.shouldClose) {
+			GLFW.glfwSetWindowShouldClose(window, true);
 		}
 		RenderEngine.render();
 		synchronized(GameEngine.glfwLock) {
@@ -82,6 +86,10 @@ public class Window {
 	}
 	
 	private void setupInputCallbacks() {
+		if(GLFW.glfwRawMouseMotionSupported()) {
+			GLFW.glfwSetInputMode(window, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
+			GLFW.glfwSetInputMode(window, GLFW.GLFW_RAW_MOUSE_MOTION, GLFW.GLFW_TRUE);
+		}
 		GLFW.glfwSetKeyCallback(window, peripherals.getKeyboard());
 		GLFW.glfwSetMouseButtonCallback(window, peripherals.getMouseButtons());
 		GLFW.glfwSetCursorPosCallback(window, peripherals.getCursorPos());
@@ -109,5 +117,9 @@ public class Window {
 	
 	public PeripheralController getPeripherals() {
 		return peripherals;
+	}
+	
+	public void shouldClose() {
+		GLFW.glfwWindowShouldClose(window);
 	}
 }
