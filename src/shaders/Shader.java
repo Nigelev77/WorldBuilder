@@ -48,6 +48,14 @@ public abstract class Shader {
 		GL20.glUseProgram(0);
 	}
 	
+	public void cleanUp() {
+		GL20.glDetachShader(programID, vertexID);
+		GL20.glDetachShader(programID, fragmentID);
+		GL20.glDeleteShader(vertexID);
+		GL20.glDeleteShader(fragmentID);
+		GL20.glDeleteProgram(programID);
+	}
+	
 	protected abstract void getAllUniformLocations();
 	protected abstract void bindAttributes();
 	

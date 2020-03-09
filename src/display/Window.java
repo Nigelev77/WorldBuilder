@@ -8,7 +8,9 @@ import org.lwjgl.opengl.GL11;
 
 import engine.RenderEngine;
 import game.GameEngine;
+import io.Keys;
 import io.PeripheralController;
+import utils.TimeManager;
 
 public class Window {
 	
@@ -24,7 +26,7 @@ public class Window {
 		this.width = width;
 		this.height = height;
 		this.title = title;
-		peripherals = new PeripheralController();
+		peripherals = new PeripheralController(this);
 	}
 	
 	public void createWindow() {
@@ -41,17 +43,16 @@ public class Window {
 		GLFWVidMode video = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
 		GLFW.glfwSetWindowPos(window, (video.width()-width)/2, (video.height()-height)/2);
 		GLFW.glfwShowWindow(window);
+		GLFW.glfwSwapInterval(1);
 		setupInputCallbacks();
 		setFrameBufferCallbacks();
-		
+		WindowManager.windowCreated = true;
+
 	}
 	
 	public void createContext() {
 		GLFW.glfwMakeContextCurrent(window);
 		GL.createCapabilities();
-		if(vsync) {
-			GLFW.glfwSwapInterval(1);
-		}
 	}
 	
 	public void update() {
@@ -68,6 +69,8 @@ public class Window {
 				swapBuffers();
 			}
 		}
+		WindowManager.time.update();
+		setFPS();
 
 	}
 	public void destroy() {
@@ -93,6 +96,7 @@ public class Window {
 		GLFW.glfwSetKeyCallback(window, peripherals.getKeyboard());
 		GLFW.glfwSetMouseButtonCallback(window, peripherals.getMouseButtons());
 		GLFW.glfwSetCursorPosCallback(window, peripherals.getCursorPos());
+		
 	}
 	
 	private void setFrameBufferCallbacks() {
@@ -122,4 +126,13 @@ public class Window {
 	public void shouldClose() {
 		GLFW.glfwWindowShouldClose(window);
 	}
+	
+	private void setFPS() {
+		GLFW.glfwSetWindowTitle(window, String.valueOf(1/WindowManager.time.getFrameTimeSeconds()));
+	}
+	
+	public boolean isKeyDown(int key) {
+		return GLFW.glfwGetKey(window, key) == GLFW.GLFW_PRESS;
+	}
+	
 }

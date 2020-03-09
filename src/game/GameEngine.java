@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFW;
 
 import display.WindowManager;
 import engine.RenderEngine;
+import glRenderingObjects.ObjectHandler;
 import player.Camera;
 
 public class GameEngine implements Runnable{
@@ -35,7 +36,11 @@ public class GameEngine implements Runnable{
 		camera = new Camera();
 		startGameLoop();
 		while(!GLFW.glfwWindowShouldClose(windows.getWindowNum())) {
-			camera.move();
+			synchronized(camera) {
+				if(!camera.moved) {
+					camera.move();
+				}
+			}
 			GLFW.glfwWaitEvents();
 		}
 		synchronized(GameEngine.glfwLock) {
@@ -62,14 +67,18 @@ public class GameEngine implements Runnable{
 			
 			windows.update();
 		}
+		cleanUp();
 	}
 	
 	private void setup() {
 		windows.createContext();
 		RenderEngine.init();
 		RenderEngine.loadStaticModel("cube");
-		
+		RenderEngine.loadStaticModel("person");
 	}
 	
-	
+	private void cleanUp() {
+		RenderEngine.cleanUp();
+	}
+
 }

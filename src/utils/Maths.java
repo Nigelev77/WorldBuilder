@@ -10,23 +10,55 @@ public class Maths {
 	public static final Vector3f posX = new Vector3f(1,0,0);
 	public static final Vector3f posY = new Vector3f(0,1,0);
 	public static final Vector3f posZ = new Vector3f(0,0,1);
-	public static final float FOV = 70f;
-	public static final float NEAR_PLANE = 0.1f;
-	public static final float FAR_PLANE = 700f;
+	public static final float FOV = 60f;
+	public static final float NEAR_PLANE = 0.5f;
+	public static final float FAR_PLANE = 1500f;
 	
 	
 	public static void setProjectionAndView(Matrix4f viewMatrix, Matrix4f projection, Camera camera) {
 		float x_width = (float) (NEAR_PLANE*Math.tan(Math.toRadians(FOV/2)));
 		float y_width = x_width/WindowManager.aspectRatio;
-		Vector3f nearPlane = new Vector3f(-x_width, -y_width, -NEAR_PLANE);
-		nearPlane.rotateX(camera.getRotations().x);
-		nearPlane.rotateY(camera.getRotations().y);
-		Vector3f width = new Vector3f(Maths.posX).mul(NEAR_PLANE);
-		Vector3f height = new Vector3f(Maths.posY).mul(NEAR_PLANE);
+		Vector3f nearPlane = new Vector3f(-x_width+camera.getPosition().x, -y_width+camera.getPosition().y, -NEAR_PLANE+camera.getPosition().z);
+		nearPlane.rotateX((float) Math.toRadians(camera.getRotations().x));
+		nearPlane.rotateY((float) Math.toRadians(camera.getRotations().y));
+		Vector3f width = new Vector3f(x_width*2, 0,0);
+		Vector3f height = new Vector3f(0,y_width*2, 0);
 		
 		Matrix4f.projViewFromRectangle(camera.getPosition(), nearPlane, width, height, 700, false, projection, viewMatrix);
 		
+	}
+	
+	public static void setProjectionAndViewTwo(Matrix4f viewMatrix, Matrix4f projection, Camera camera) {
+		float aspectRatio = WindowManager.aspectRatio;
+		projection = new Matrix4f().setPerspective((float) Math.toRadians(FOV), aspectRatio, NEAR_PLANE, FAR_PLANE);
 
+		
+		Vector3f cameraPos = camera.getPosition();
+		Vector3f rotation = camera.getRotations();
+		System.out.println(rotation.x+" "+rotation.y);
+		viewMatrix.identity();
+		viewMatrix.rotate((float) Math.toRadians(rotation.x), new Vector3f(1,0,0))
+			.rotate((float) Math.toRadians(rotation.y), new Vector3f(0,1,0))
+			.rotate((float) Math.toRadians(rotation.z), new Vector3f(0,0,1));
+		viewMatrix.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
+	}
+	
+	public static void setProjectionMatrix(Matrix4f projection) {
+		float aspectRatio = WindowManager.aspectRatio;
+		projection.setPerspective((float) Math.toRadians(FOV), aspectRatio, NEAR_PLANE, FAR_PLANE);
+	}
+	
+	public static Matrix4f setViewMatrix(Camera camera) {
+		Matrix4f viewMatrix = new Matrix4f();
+		Vector3f cameraPos = camera.getPosition();
+		Vector3f rotation = camera.getRotations();
+		viewMatrix.identity();
+		viewMatrix.rotate((float) Math.toRadians(rotation.x), new Vector3f(1,0,0))
+			.rotate((float) Math.toRadians(rotation.y), new Vector3f(0,1,0))
+			.rotate((float) Math.toRadians(rotation.z), new Vector3f(0,0,1));
+		viewMatrix.translate(-cameraPos.x, -cameraPos.y, -cameraPos.z);
+		
+		return viewMatrix;
 		
 	}
 	

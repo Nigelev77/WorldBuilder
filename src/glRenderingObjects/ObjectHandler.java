@@ -20,8 +20,8 @@ public class ObjectHandler {
 	public static void cleanUp() {
 		int[] vaoArr = new int[vaos.size()];
 		vaos.forEach(n->vaoArr[vaos.indexOf(n)] = n.intValue());
-		int[] vboArr = new int[vaos.size()];
-		vbos.forEach(n->vboArr[vaos.indexOf(n)] = n.intValue());
+		int[] vboArr = new int[vbos.size()];
+		vbos.forEach(n->vboArr[vbos.indexOf(n)] = n.intValue());
 		GL30.glDeleteBuffers(vboArr);
 		GL30.glDeleteVertexArrays(vaoArr);
 	}

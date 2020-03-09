@@ -29,6 +29,7 @@ public class SingleFaceWaveFrontLoader {
 		try {
 			FileReader file = new FileReader(new File(fileName));
 			BufferedReader reader = new BufferedReader(file);
+			String faces = null;
 			for(String line = reader.readLine();line!=null;line = reader.readLine()) {
 				if(line.startsWith("v ")) {
 					vertices.add(parseLine3f(line.split(" ")));
@@ -37,15 +38,17 @@ public class SingleFaceWaveFrontLoader {
 				}else if(line.startsWith("vn ")) {
 					normals.add(parseLine3f(line.split(" ")));
 				}else if(line.startsWith("f ")) {
+					faces = line;
 					break;
 				}else {
+					faces=line;
 					continue;
 				}
 			}
 			textureCoordsArr = new float[vertices.size()*2];
 			normalsArr = new float[vertices.size()*3];
 			
-			for(String line = reader.readLine();line!=null;line = reader.readLine()) {
+			for(String line = faces;line!=null;line = reader.readLine()) {
 				if(!line.startsWith("f ")) {
 					continue;
 				}

@@ -4,14 +4,19 @@ import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
+import display.Window;
+
 public class PeripheralController {
 	
 	public KeyboardController keyboard;
 	public MouseController mouse;
 	
-	public PeripheralController() {
+	protected static Window window;
+	
+	public PeripheralController(Window window) {
 		keyboard = new KeyboardController();
 		mouse = new MouseController();
+		this.window=window;
 	}
 	
 	public GLFWKeyCallback getKeyboard() {

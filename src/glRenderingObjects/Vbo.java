@@ -24,8 +24,7 @@ public class Vbo {
 		for(float[] arr:data) {
 			length+=arr.length;
 		}
-		
-		
+
 		masterBuffer = BufferUtils.createFloatBuffer(length);
 		indexBuffer = BufferUtils.createIntBuffer(indices.length);
 		vertexCount = indices.length;
@@ -58,6 +57,7 @@ public class Vbo {
 					interleavedData[pointer++] = data[attributeList][elements[attributeList]++];
 				}
 			}
+		
 		}
 		masterBuffer.put(interleavedData);
 		masterBuffer.flip();

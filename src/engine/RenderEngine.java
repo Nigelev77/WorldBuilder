@@ -20,15 +20,15 @@ public class RenderEngine {
 	
 	public static void render() {
 		synchronized(GameEngine.camera) {
+			
 			renderer.render(GameEngine.camera);
+			GameEngine.camera.moved=false;
 		}
 	}
 	
 	public static void loadStaticModel(String fileName) {
 		StaticModel model = loader.renderStaticModel("res/"+fileName+".obj");
 		renderer.loadStaticModel(model);
-		System.out.println("Successful");
-		
 		Vao vao = new Vao();
 		float[] vertices = {
 				-0.5f, 0.5f, 0f,//v0
@@ -45,6 +45,11 @@ public class RenderEngine {
 		StaticModel rect = new StaticModel(vao);
 		renderer.loadStaticModel(rect);
 		
+		
+	}
+	
+	public static void cleanUp() {
+		renderer.cleanUp();
 	}
 	
 }

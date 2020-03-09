@@ -12,9 +12,11 @@ public class Camera {
 	private Vector3f position;
 	private PeripheralController peripherals;
 	
+	public boolean moved = false;
+	
 	public Camera() {
 		this.rotations = new Vector3f(0,0,0);
-		this.position = new Vector3f(0,0,0);
+		this.position = new Vector3f(0,0,10f);
 		Window window = GameEngine.windows.getWindow();
 		peripherals = window.getPeripherals();
 	}
@@ -31,9 +33,10 @@ public class Camera {
 		rotations.add(peripherals.mouse.getMousePos());
 		rotations.x = rotations.x%360;
 		rotations.y = rotations.y%360;
-		//System.out.println(rotations.x+" "+rotations.y);
+		rotations.y +=360;
+		rotations.y%=360;
 		position.add(peripherals.keyboard.updatePos(rotations.x, rotations.y));
-		System.out.println(position.x+" "+position.y+" "+position.z);
+
 	}
 
 }

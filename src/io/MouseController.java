@@ -17,7 +17,6 @@ public class MouseController{
 	
 	public MouseController() {
 		mouseButtons = new GLFWMouseButtonCallback() {
-			
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
 				//System.out.println(GLFW.glfwGetMouseButton(window, button));
@@ -30,6 +29,7 @@ public class MouseController{
 			public void invoke(long window, double xpos, double ypos) {
 				deltaPos.x = xpos - mouse.x;
 				deltaPos.y = ypos - mouse.y;
+				
 				mouse.x=xpos;
 				mouse.y=ypos;
 				
@@ -50,8 +50,9 @@ public class MouseController{
 		cursorPos.free();
 	}
 	public Vector3f getMousePos() {
-		mousef.x = (float) (deltaPos.y);
-		mousef.y = (float) (deltaPos.x);
+		mousef.x = (float)(deltaPos.y);
+		mousef.y = (float)(deltaPos.x);
+		deltaPos.zero();
 		return mousef;
 	}
 	
