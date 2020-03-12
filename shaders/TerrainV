@@ -3,14 +3,24 @@
 in vec3 position;
 
 out vec4 colour;
+out vec3 unitLight;
+out vec3 unitCamera;
 
 uniform mat4 projection;
 uniform mat4 view;
+uniform mat4 transform;
 
-
+uniform vec3 lightPos;
 
 void main(void){
-	gl_Position = projection * view * vec4(position, 1.0);
+	vec4 worldPos = transform*vec4(position, 1.0);
+	vec4 cameraRelative = view*worldPos;
+	gl_Position = projection * cameraRelative;
+	
+	
 	colour = vec4(0.0,1.0,0.0,1.0);
+	
+	unitLight = normalize(lightPos-worldPos.xyz);
+	unitCamera = normalize((inverse(view) * vec4(0,0,0,1)).xyz - worldPos.xyz);
 	
 }

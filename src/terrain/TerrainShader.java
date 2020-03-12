@@ -1,6 +1,7 @@
 package terrain;
 
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 import shaders.Shader;
 import shaders.Uniform;
@@ -12,6 +13,8 @@ public class TerrainShader extends Shader{
 	
 	protected Uniform<Matrix4f> projection;
 	protected Uniform<Matrix4f> view;
+	protected Uniform<Matrix4f> transform;
+	protected Uniform<Vector3f> lightPos;
 	
 	
 	public TerrainShader() {
@@ -23,8 +26,8 @@ public class TerrainShader extends Shader{
 	protected void getAllUniformLocations() {
 		projection = new Uniform<Matrix4f>("projection", this);
 		view = new Uniform<Matrix4f>("view", this);
-		
-		
+		transform = new Uniform<Matrix4f>("transform", this);
+		lightPos = new Uniform<Vector3f>("lightPos", this);
 	}
 
 

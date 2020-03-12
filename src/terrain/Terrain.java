@@ -1,6 +1,7 @@
 package terrain;
 
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 import glRenderingObjects.Vao;
 import utils.Maths;
@@ -71,6 +72,11 @@ public class Terrain {
 	
 	public int getVertexCount() {
 		return mesh.getVertexCount();
+	}
+	
+	
+	public Matrix4f getTranform() {
+		return Maths.createTransformMatrix(new Vector3f(x, 0, z), 0, 0, 0, 1);
 	}
 	
 }
