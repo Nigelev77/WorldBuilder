@@ -1,40 +1,67 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL30;
 
-import display.WindowManager;
+import entities.StaticEntity;
 import glRenderingObjects.ObjectHandler;
 import models.StaticModel;
 import player.Camera;
 import shaders.StaticModelShader;
+import terrain.TerrainRenderer;
 import utils.Maths;
 
 public class MasterRenderer {
 	
 	private List<StaticModel> statics = new ArrayList<StaticModel>();
+	private Map<String, StaticModel> modelNames = new HashMap<String, StaticModel>();
 	private StaticModelShader shader;
 	private Matrix4f projectionMatrix = new Matrix4f();
-	private Matrix4f viewMatrix = new Matrix4f();
+
+	
+	private TerrainRenderer terrainRenderer;
 	
 	
 	public MasterRenderer() {
+		Maths.setProjectionMatrix(projectionMatrix);
 		shader = new StaticModelShader();
 		shader.Start();
 		shader.Stop();
+		terrainRenderer = new TerrainRenderer(projectionMatrix);
 	}
 	
 	public void render(Camera camera) {
+		Matrix4f viewMatrix = Maths.setViewMatrix(camera);
+		renderObjects(viewMatrix);
+		renderStatics(viewMatrix);
+		terrainRenderer.render(viewMatrix);
+	}
+	
+	
+	public void renderObjects(Matrix4f viewMatrix) {
 		shader.Start();
-		prepare(camera);
+		prepare(viewMatrix);
 		for(StaticModel model:statics) {
 			prepareModel(model);
 			GL15.glDrawElements(GL15.GL_TRIANGLES, model.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
+			finish();
+		}
+		endRendering();
+	}
+	
+	public void renderStatics(Matrix4f viewMatrix) {
+		shader.Start();
+		prepare(viewMatrix);
+		for(StaticEntity statics: RenderEngine.getEntities()) {
+			prepareStatic(statics);
+			GL15.glDrawElements(GL15.GL_TRIANGLES, statics.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
 			finish();
 		}
 		endRendering();
@@ -48,27 +75,40 @@ public class MasterRenderer {
 		GL30.glBindVertexArray(0);
 	}
 	
-	private void prepare(Camera camera) {
+	private void prepare(Matrix4f viewMatrix) {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
 		GL11.glClearColor(1, 0, 0, 1);
 		shader.projectionMatrix.loadValue(projectionMatrix, shader);
-		shader.viewMatrix.loadValue(Maths.setViewMatrix(camera), shader);
+		shader.viewMatrix.loadValue(viewMatrix, shader);
+		shader.lightPos.loadValue(RenderEngine.getLight().getPosition(), shader);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glCullFace(GL11.GL_BACK);
 	}
 	
 	private void prepareModel(StaticModel model) {
 		GL30.glBindVertexArray(model.getVaoId());
+		shader.transform.loadValue(new Matrix4f().identity(), shader);
 	}
+	
+	private void prepareStatic(StaticEntity entity) {
+		GL30.glBindVertexArray(entity.getVaoID());
+		shader.transform.loadValue(entity.getTransformMatrix(), shader);
+	}
+	
 	
 	public void loadStaticModel(StaticModel staticModel) {
 		statics.add(staticModel);
+		modelNames.put(staticModel.getName(), staticModel);
 	}
 	
 	public void cleanUp() {
 		shader.cleanUp();
 		ObjectHandler.cleanUp();
+	}
+	
+	public StaticModel getStaticModel(String name) {
+		return modelNames.get(name);
 	}
 	
 }

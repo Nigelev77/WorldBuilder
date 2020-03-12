@@ -19,6 +19,10 @@ public class Uniform<Type> {
 		return type;
 	}
 	
+	public int getLocation() {
+		return location;
+	}
+	
 	
 	
 }

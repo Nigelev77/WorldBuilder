@@ -11,7 +11,7 @@ import player.Camera;
 
 public class TerrainRenderer {
 	
-	private List<Terrain> terrains = new ArrayList<Terrain>();
+	private static List<Terrain> terrains = new ArrayList<Terrain>();
 	
 	private Matrix4f projectionMatrix;
 	private TerrainShader shader;
@@ -21,7 +21,6 @@ public class TerrainRenderer {
 		this.projectionMatrix = projection;
 		this.shader = new TerrainShader();
 		shader.Start();
-		shader.projection.loadValue(projectionMatrix, shader);
 		shader.Stop();
 		
 	}
@@ -32,7 +31,7 @@ public class TerrainRenderer {
 			prepareTerrain(terrain);
 			GL30.glDrawElements(GL11.GL_TRIANGLES, terrain.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
 		}
-		
+		endRendering();
 		
 		
 	}
@@ -42,12 +41,13 @@ public class TerrainRenderer {
 		shader.Stop();
 	}
 	
-	public void addTerrain(int x, int z) {
+	public static void addTerrain(int x, int z) {
 		terrains.add(new Terrain(x, z));
 	}
 	
 	private void prepare(Matrix4f viewMatrix) {
 		shader.Start();
+		shader.projection.loadValue(projectionMatrix, shader);
 		shader.view.loadValue(viewMatrix, shader);
 	}
 	

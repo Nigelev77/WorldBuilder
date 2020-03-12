@@ -3,13 +3,26 @@
 layout( location=0) in vec3 vertex_position;
 
 out vec4 outColour;
+out vec3 unitLight;
+out vec3 unitCamera;
 
 uniform mat4 projectMatrix;
 uniform mat4 viewMatrix;
+uniform mat4 transform;
+
+uniform vec3 lightPos;
 
 void main(void){
+
+	vec4 worldPos = transform*vec4(vertex_position, 1.0);
+	vec4 cameraRelative = viewMatrix*worldPos;
+	gl_Position =projectMatrix*cameraRelative;
 	
-	gl_Position =projectMatrix*viewMatrix*vec4(vertex_position, 1.0);
-	//gl_Position = vec4(vertex_position.xy, vertex_position.z-0.5f, 1.0);
+	
 	outColour = vec4(vertex_position, 1.0);
+	
+	unitLight = normalize(lightPos-worldPos.xyz);
+	unitCamera = normalize((inverse(viewMatrix) *vec4(0,0,0,1.0)).xyz - worldPos.xyz);
+	
+	
 }

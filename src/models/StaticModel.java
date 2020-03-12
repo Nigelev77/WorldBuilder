@@ -5,9 +5,11 @@ import glRenderingObjects.Vao;
 public class StaticModel {
 	
 	private Vao vao;
+	private String name;
 	
-	public StaticModel(Vao vao) {
+	public StaticModel(Vao vao, String name) {
 		this.vao = vao;
+		this.name = name;
 	}
 	
 	public int getVaoId() {
@@ -17,5 +19,11 @@ public class StaticModel {
 	public int getVertexCount() {
 		return vao.getVertexCount();
 	}
+
+	public String getName() {
+		return name;
+	}
+	
+	
 	
 }

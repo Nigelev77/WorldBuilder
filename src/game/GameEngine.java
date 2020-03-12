@@ -1,11 +1,13 @@
 package game;
 
+import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 import display.WindowManager;
 import engine.RenderEngine;
 import glRenderingObjects.ObjectHandler;
 import player.Camera;
+import terrain.TerrainRenderer;
 
 public class GameEngine implements Runnable{
 	
@@ -75,6 +77,11 @@ public class GameEngine implements Runnable{
 		RenderEngine.init();
 		RenderEngine.loadStaticModel("cube");
 		RenderEngine.loadStaticModel("person");
+		TerrainRenderer.addTerrain(0, 0);
+		RenderEngine.addStaticEntity(new Vector3f(100f,0f,-150f), new Vector3f().zero(), 1, "cube");
+		RenderEngine.addStaticEntity(new Vector3f(200f, 0f, -250f), new Vector3f().zero(), 2, "cube");
+		RenderEngine.addStaticEntity(new Vector3f(300f,0f,-350f), new Vector3f().zero(), 3, "cube");
+		RenderEngine.addLight(new Vector3f(100,100,-100));
 	}
 	
 	private void cleanUp() {

@@ -1,6 +1,7 @@
 package shaders;
 
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 public class StaticModelShader extends Shader{
 	
@@ -9,7 +10,8 @@ public class StaticModelShader extends Shader{
 	
 	public Uniform<Matrix4f> projectionMatrix;
 	public Uniform<Matrix4f> viewMatrix;
-	
+	public Uniform<Vector3f> lightPos;
+	public Uniform<Matrix4f> transform;
 	
 	
 	public StaticModelShader() {
@@ -22,6 +24,8 @@ public class StaticModelShader extends Shader{
 	protected void getAllUniformLocations() {
 		projectionMatrix = new Uniform<Matrix4f>("projectMatrix", this);
 		viewMatrix = new Uniform<Matrix4f>("viewMatrix", this);
+		lightPos = new Uniform<Vector3f>("lightPos", this);
+		transform = new Uniform<Matrix4f>("transform", this);
 	}
 
 

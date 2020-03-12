@@ -11,7 +11,6 @@ public class TerrainShader extends Shader{
 	private static final String fragment = "shaders/TerrainF";
 	
 	protected Uniform<Matrix4f> projection;
-	protected Uniform<Matrix4f> transform;
 	protected Uniform<Matrix4f> view;
 	
 	
@@ -23,7 +22,6 @@ public class TerrainShader extends Shader{
 	@Override
 	protected void getAllUniformLocations() {
 		projection = new Uniform<Matrix4f>("projection", this);
-		transform = new Uniform<Matrix4f>("transform", this);
 		view = new Uniform<Matrix4f>("view", this);
 		
 		

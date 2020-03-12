@@ -25,6 +25,7 @@ public class Terrain {
 		this.x = x;
 		this.z = z;
 		calculateMesh();
+		System.out.println("oh no");
 		
 	}
 	
@@ -32,19 +33,20 @@ public class Terrain {
 		int vertexPointer=0;
 		for(int i =0; i<VERTICES;i++) {
 			for(int j=0; j<VERTICES;j++) {
-				vertices[vertexPointer*3] = (float)i/(VERTICES-1f);
+				vertices[vertexPointer*3] = (float)j/(VERTICES-1f)*SIZE;
 				vertices[vertexPointer*3+1] = 0;
-				vertices[vertexPointer*3+2] = -j/(VERTICES-1f);
-				textureCoords[vertexPointer*2] = i/(VERTICES-1f);
-				textureCoords[vertexPointer*2+1] = j/(VERTICES-1f);
+				vertices[vertexPointer*3+2] = (float)-i/(VERTICES-1f)*SIZE;
+				textureCoords[vertexPointer*2] = (float)j/(VERTICES-1f);
+				textureCoords[vertexPointer*2+1] = (float)i/(VERTICES-1f);
 				normals[vertexPointer*3] = 0;
 				normals[vertexPointer*3+1] = 1;
 				normals[vertexPointer*3+2] = 0;
+				vertexPointer++;
 			}
 		}
 		int pointer=0;
-		for(int i=0;i<VERTICES;i++) {
-			for(int j=0;j<VERTICES;j++) {
+		for(int i=0;i<VERTICES-1;i++) {
+			for(int j=0;j<VERTICES-1;j++) {
 				int topLeft = (i*VERTICES)+j;
 				int topRight = (i*VERTICES)+j+1;
 				int bottomLeft = ((i+1)*VERTICES)+j;
@@ -58,7 +60,6 @@ public class Terrain {
 				
 			}
 		}
-		
 		this.mesh = new Vao();
 		mesh.storeData(indices, new int[] {3, 2, 3}, vertices, textureCoords, normals);
 		
