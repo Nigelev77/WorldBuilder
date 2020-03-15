@@ -1,10 +1,13 @@
 #version 400 core
 
 layout( location=0) in vec3 vertex_position;
+layout( location=2) in vec3 vertex_normal;
+
 
 out vec4 outColour;
 out vec3 unitLight;
 out vec3 unitCamera;
+out vec3 normal;
 
 uniform mat4 projectMatrix;
 uniform mat4 viewMatrix;
@@ -23,6 +26,6 @@ void main(void){
 	
 	unitLight = normalize(lightPos-worldPos.xyz);
 	unitCamera = normalize((inverse(viewMatrix) *vec4(0,0,0,1.0)).xyz - worldPos.xyz);
-	
+	normal = (transform* vec4(vertex_normal,0.0)).xyz;
 	
 }

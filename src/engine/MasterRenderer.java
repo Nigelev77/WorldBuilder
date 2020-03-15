@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL30;
 
 import entities.StaticEntity;
+import game.GameEngine;
 import glRenderingObjects.ObjectHandler;
 import models.StaticModel;
 import player.Camera;
@@ -31,6 +32,7 @@ public class MasterRenderer {
 	
 	public MasterRenderer() {
 		Maths.setProjectionMatrix(projectionMatrix);
+		GameEngine.selector.setProjection(projectionMatrix);
 		shader = new StaticModelShader();
 		shader.Start();
 		shader.Stop();

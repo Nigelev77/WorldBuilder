@@ -35,6 +35,8 @@ public class Camera {
 		rotations.y = rotations.y%360;
 		rotations.y +=360;
 		rotations.y%=360;
+		rotations.x = Math.max(-90, rotations.x);
+		rotations.x = Math.min(90, rotations.x);
 		position.add(peripherals.keyboard.updatePos(rotations.x, rotations.y));
 
 	}

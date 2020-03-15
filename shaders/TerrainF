@@ -3,16 +3,16 @@
 in vec4 colour;
 in vec3 unitLight;
 in vec3 unitCamera;
-
+in vec3 vertexNormal;
 
 out vec4 out_colour;
 
 void main(void){
 	
-	float lightCameraDot = dot(unitLight, unitCamera);
-	float brightness = max(0,lightCameraDot);
+	float lightCameraDot = dot(unitLight, vertexNormal);
+	float brightness = max(0.2,lightCameraDot);
 	
 	
-	out_colour = colour*brightness;
+	out_colour = colour*(brightness);
 
 }

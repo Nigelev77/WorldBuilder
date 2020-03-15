@@ -33,7 +33,7 @@ public class StaticModelShader extends Shader{
 	@Override
 	protected void bindAttributes() {
 		super.bindAttribute(0, "vertex_position");
-		
+		super.bindAttribute(2, "vertex_normal");
 		
 	}
 

@@ -7,7 +7,9 @@ import display.WindowManager;
 import engine.RenderEngine;
 import glRenderingObjects.ObjectHandler;
 import player.Camera;
+import selectors.MouseSelector;
 import terrain.TerrainRenderer;
+import utils.Maths;
 
 public class GameEngine implements Runnable{
 	
@@ -22,6 +24,8 @@ public class GameEngine implements Runnable{
 	public static Object glfwLock = new Object();
 	
 	public static volatile Camera camera;
+	
+	public static MouseSelector selector = new MouseSelector();
 	
 	public GameEngine() {
 		
@@ -42,7 +46,9 @@ public class GameEngine implements Runnable{
 				if(!camera.moved) {
 					camera.move();
 				}
+				selector.update(Maths.setViewMatrix(camera));
 			}
+
 			GLFW.glfwWaitEvents();
 		}
 		synchronized(GameEngine.glfwLock) {
@@ -81,7 +87,7 @@ public class GameEngine implements Runnable{
 		RenderEngine.addStaticEntity(new Vector3f(100f,0f,-150f), new Vector3f().zero(), 1, "cube");
 		RenderEngine.addStaticEntity(new Vector3f(200f, 0f, -250f), new Vector3f().zero(), 2, "cube");
 		RenderEngine.addStaticEntity(new Vector3f(300f,0f,-350f), new Vector3f().zero(), 3, "cube");
-		RenderEngine.addLight(new Vector3f(100,100,-100));
+		RenderEngine.addLight(new Vector3f(250,250,-250));
 	}
 	
 	private void cleanUp() {
