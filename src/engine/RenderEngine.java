@@ -19,6 +19,8 @@ public class RenderEngine {
 	
 	private static List<StaticEntity> staticEntities = new ArrayList<StaticEntity>();
 	
+	private static List<StaticEntity> highlightedEntities = new ArrayList<StaticEntity>();
+	
 	private static Light light = new Light(new Vector3f().zero(), new Vector3f().zero(), 1, null);
 	
 	public static void init() {
@@ -77,6 +79,15 @@ public class RenderEngine {
 	
 	public static Light getLight() {
 		return RenderEngine.light;
+	}
+	
+	public static void addHighlighted(Vector3f position, Vector3f rotation, float scale, String model) {
+		StaticModel staticModel = renderer.getStaticModel(model);
+		highlightedEntities.add(new StaticEntity(position, rotation, scale, staticModel));
+	}
+	
+	public static List<StaticEntity> getHighlighted(){
+		return highlightedEntities;
 	}
 	
 }

@@ -7,24 +7,26 @@ in vec3 normal;
 
 out vec4 out_Colour;
 
-const float damp = 2;
-const float reflectivity = 2;
+const float damp = 1;
+const float reflectivity = 0.5;
 
 vec4 calculateLighting(vec3 light, vec3 normal, vec3 camera){
-	float lightCamDot = dot(light, normal);
-	float brightness = max(lightCamDot, 0.2);
-	vec3 diffuse = brightness*outColour.xyz;
-	vec3 reflected = reflect(-light, normal);
+	float lightCamDot = dot(normal, light);
+	float brightness = max(lightCamDot, 0.0);
+	vec3 diffuse = brightness*vec3(1.0,1.0,1.0);
 	
-	vec3 final = pow(max(dot(reflected, camera), 0.0), damp)*reflectivity*outColour.xyz;
+	
+	
+	vec3 reflected = reflect(-light, normal);
+	vec3 final = pow(max(dot(reflected, camera), 0.0), damp)*reflectivity*vec3(1.0,1.0,1.0);
+	final = max(final, 0.0);
 	
 	return vec4(diffuse,1.0) + vec4(final,1.0);
 
 }
 
 void main(void){
-	
-	out_Colour = calculateLighting(unitLight, normal, unitCamera);
+	out_Colour = calculateLighting(normalize(unitLight), normalize(normal), normalize(unitCamera));
 
 
 }

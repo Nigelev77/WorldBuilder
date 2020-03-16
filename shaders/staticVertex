@@ -24,8 +24,8 @@ void main(void){
 	
 	outColour = vec4(vertex_position, 1.0);
 	
-	unitLight = normalize(lightPos-worldPos.xyz);
-	unitCamera = normalize((inverse(viewMatrix) *vec4(0,0,0,1.0)).xyz - worldPos.xyz);
+	unitLight = lightPos-worldPos.xyz;
+	unitCamera = (inverse(viewMatrix) *vec4(0.0,0.0,0.0,1.0)).xyz - worldPos.xyz;
 	normal = (transform* vec4(vertex_normal,0.0)).xyz;
 	
 }

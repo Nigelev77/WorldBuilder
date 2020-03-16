@@ -83,11 +83,15 @@ public class GameEngine implements Runnable{
 		RenderEngine.init();
 		RenderEngine.loadStaticModel("cube");
 		RenderEngine.loadStaticModel("person");
+		RenderEngine.loadStaticModel("barrel");
 		TerrainRenderer.addTerrain(0, 0);
 		RenderEngine.addStaticEntity(new Vector3f(100f,0f,-150f), new Vector3f().zero(), 1, "cube");
 		RenderEngine.addStaticEntity(new Vector3f(200f, 0f, -250f), new Vector3f().zero(), 2, "cube");
 		RenderEngine.addStaticEntity(new Vector3f(300f,0f,-350f), new Vector3f().zero(), 3, "cube");
-		RenderEngine.addLight(new Vector3f(250,250,-250));
+		RenderEngine.addLight(new Vector3f(250,0,-250));
+		RenderEngine.addStaticEntity(new Vector3f(50,0,-50f), new Vector3f(0,0,0), 1f, "person");
+		RenderEngine.addStaticEntity(new Vector3f(100,10,-100f), new Vector3f().zero(), 1, "barrel");
+		RenderEngine.addHighlighted(new Vector3f(150, 0, -150f), new Vector3f().zero(), 1f, "barrel");
 	}
 	
 	private void cleanUp() {

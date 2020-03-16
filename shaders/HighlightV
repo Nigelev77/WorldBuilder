@@ -1,0 +1,15 @@
+#version 400 core
+
+
+in vec3 vertex_position;
+in vec3 vertex_normal;
+
+
+out vec4 colour;
+
+uniform mat4 mvp;
+
+void main(void){
+	gl_Position = mvp*vec4(vertex_position,1.0);
+
+}

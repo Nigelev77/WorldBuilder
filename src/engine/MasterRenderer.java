@@ -13,6 +13,8 @@ import org.lwjgl.opengl.GL30;
 import entities.StaticEntity;
 import game.GameEngine;
 import glRenderingObjects.ObjectHandler;
+import highlight.HighlightRenderer;
+import highlight.HighlightShader;
 import models.StaticModel;
 import player.Camera;
 import shaders.StaticModelShader;
@@ -28,7 +30,7 @@ public class MasterRenderer {
 
 	
 	private TerrainRenderer terrainRenderer;
-	
+	private HighlightRenderer highlightRenderer;
 	
 	public MasterRenderer() {
 		Maths.setProjectionMatrix(projectionMatrix);
@@ -37,6 +39,7 @@ public class MasterRenderer {
 		shader.Start();
 		shader.Stop();
 		terrainRenderer = new TerrainRenderer(projectionMatrix);
+		highlightRenderer = new HighlightRenderer(projectionMatrix);
 	}
 	
 	public void render(Camera camera) {
@@ -44,6 +47,7 @@ public class MasterRenderer {
 		renderObjects(viewMatrix);
 		renderStatics(viewMatrix);
 		terrainRenderer.render(viewMatrix);
+		highlightRenderer.render(viewMatrix, RenderEngine.getLight().getPosition());
 	}
 	
 	
@@ -84,6 +88,10 @@ public class MasterRenderer {
 		shader.projectionMatrix.loadValue(projectionMatrix, shader);
 		shader.viewMatrix.loadValue(viewMatrix, shader);
 		shader.lightPos.loadValue(RenderEngine.getLight().getPosition(), shader);
+		enableCulling();
+	}
+	
+	private void enableCulling() {
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glCullFace(GL11.GL_BACK);
 	}
