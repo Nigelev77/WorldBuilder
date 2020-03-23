@@ -14,7 +14,6 @@ import entities.StaticEntity;
 import game.GameEngine;
 import glRenderingObjects.ObjectHandler;
 import highlight.HighlightRenderer;
-import highlight.HighlightShader;
 import models.StaticModel;
 import player.Camera;
 import shaders.StaticModelShader;
@@ -44,23 +43,12 @@ public class MasterRenderer {
 	
 	public void render(Camera camera) {
 		Matrix4f viewMatrix = Maths.setViewMatrix(camera);
-		renderObjects(viewMatrix);
 		renderStatics(viewMatrix);
-		terrainRenderer.render(viewMatrix);
-		highlightRenderer.render(viewMatrix, RenderEngine.getLight().getPosition());
+		//terrainRenderer.render(viewMatrix);
+		//highlightRenderer.render(viewMatrix, RenderEngine.getLight().getPosition());
 	}
 	
 	
-	public void renderObjects(Matrix4f viewMatrix) {
-		shader.Start();
-		prepare(viewMatrix);
-		for(StaticModel model:statics) {
-			prepareModel(model);
-			GL15.glDrawElements(GL15.GL_TRIANGLES, model.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
-			finish();
-		}
-		endRendering();
-	}
 	
 	public void renderStatics(Matrix4f viewMatrix) {
 		shader.Start();
@@ -83,7 +71,7 @@ public class MasterRenderer {
 	
 	private void prepare(Matrix4f viewMatrix) {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT|GL11.GL_STENCIL_BUFFER_BIT);
 		GL11.glClearColor(1, 0, 0, 1);
 		shader.projectionMatrix.loadValue(projectionMatrix, shader);
 		shader.viewMatrix.loadValue(viewMatrix, shader);
@@ -96,10 +84,6 @@ public class MasterRenderer {
 		GL11.glCullFace(GL11.GL_BACK);
 	}
 	
-	private void prepareModel(StaticModel model) {
-		GL30.glBindVertexArray(model.getVaoId());
-		shader.transform.loadValue(new Matrix4f().identity(), shader);
-	}
 	
 	private void prepareStatic(StaticEntity entity) {
 		GL30.glBindVertexArray(entity.getVaoID());

@@ -35,7 +35,6 @@ public class Maths {
 		
 		Vector3f cameraPos = camera.getPosition();
 		Vector3f rotation = camera.getRotations();
-		System.out.println(rotation.x+" "+rotation.y);
 		viewMatrix.identity();
 		viewMatrix.rotate((float) Math.toRadians(rotation.x), new Vector3f(1,0,0))
 			.rotate((float) Math.toRadians(rotation.y), new Vector3f(0,1,0))

@@ -8,9 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import engine.RenderEngine;
 import game.GameEngine;
-import io.Keys;
+import gui.GUIMasterRenderer;
 import io.PeripheralController;
-import utils.TimeManager;
 
 public class Window {
 	
@@ -43,7 +42,9 @@ public class Window {
 		GLFWVidMode video = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
 		GLFW.glfwSetWindowPos(window, (video.width()-width)/2, (video.height()-height)/2);
 		GLFW.glfwShowWindow(window);
-		GLFW.glfwSwapInterval(1);
+		if(vsync) {
+			GLFW.glfwSwapInterval(1);
+		}
 		setupInputCallbacks();
 		setFrameBufferCallbacks();
 		WindowManager.windowCreated = true;
@@ -56,14 +57,15 @@ public class Window {
 	}
 	
 	public void update() {
-		if(resized) {
-			GL11.glViewport(0, 0, width, height);
-			setResized(false);
-		}
+//		if(resized) {
+//			GL11.glViewport(0, 0, width, height);
+//			setResized(false);
+//		}
 		if(WindowManager.shouldClose) {
 			GLFW.glfwSetWindowShouldClose(window, true);
 		}
 		RenderEngine.render();
+		GUIMasterRenderer.render();
 		synchronized(GameEngine.glfwLock) {
 			if(GameEngine.isRunning) {
 				swapBuffers();

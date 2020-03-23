@@ -22,7 +22,7 @@ void main(void){
 	
 	colour = vec4(0.0,1.0,0.0,1.0);
 	
-	unitLight = normalize(lightPos-worldPos.xyz);
-	unitCamera = normalize((inverse(view) * vec4(0,0,0,1)).xyz - worldPos.xyz);
+	unitLight = lightPos-worldPos.xyz;
+	unitCamera = (inverse(view) * vec4(0,0,0,1)).xyz - worldPos.xyz;
 	vertexNormal = normal;
 }

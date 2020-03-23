@@ -5,16 +5,14 @@ import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;
 
-import display.Window;
 import display.WindowManager;
+import gui.GUIMasterRenderer;
 
 public class KeyboardController{
 	
 	private GLFWKeyCallback keyboard;
 	
 	private Vector2f pos = new Vector2f();
-	private float elevation = 0;
-	
 	
 	public KeyboardController(){
 		
@@ -24,6 +22,8 @@ public class KeyboardController{
 			public void invoke(long window, int key, int scancode, int action, int mods) {
 				if(key==GLFW.GLFW_KEY_ESCAPE) {
 					WindowManager.shouldClose = true;
+				}else if(key==GLFW.GLFW_KEY_M && GLFW.glfwGetKey(window, key)==GLFW.GLFW_RELEASE) {
+					GUIMasterRenderer.showMenu= !GUIMasterRenderer.showMenu;
 				}
 			}
 		};
@@ -58,7 +58,6 @@ public class KeyboardController{
 		
 
 		pos.zero();
-		elevation = 0;
 		return newPos;
 	}
 	

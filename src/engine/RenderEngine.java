@@ -30,11 +30,8 @@ public class RenderEngine {
 	}
 	
 	public static void render() {
-		synchronized(GameEngine.camera) {
-			
-			renderer.render(GameEngine.camera);
-			GameEngine.camera.moved=false;
-		}
+		renderer.render(GameEngine.camera);
+		GameEngine.camera.moved=false;
 	}
 	
 	public static void loadStaticModel(String fileName) {

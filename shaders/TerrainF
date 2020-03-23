@@ -7,12 +7,23 @@ in vec3 vertexNormal;
 
 out vec4 out_colour;
 
+const float damp = 1;
+const float reflectivity = 0.5;
+
 void main(void){
 	
-	float lightCameraDot = dot(unitLight, vertexNormal);
-	float brightness = max(0.2,lightCameraDot);
+	vec3 light = normalize(unitLight);
+	vec3 camera = normalize(unitCamera);
+	vec3 normal = normalize(vertexNormal);
+	
+	float lightCameraDot = dot(light, normal);
+	float brightness = max(0.0,lightCameraDot);
+	
+	vec3 reflected = reflect(-light, normal);
+	vec3 final = pow(max(dot(reflected, camera), 0.0), damp)*reflectivity*vec3(1.0,1.0,1.0);
 	
 	
-	out_colour = colour*(brightness);
+	
+	out_colour = vec4(brightness*vec3(1.0,1.0,1.0), 1.0) + vec4(final, 1.0);
 
 }

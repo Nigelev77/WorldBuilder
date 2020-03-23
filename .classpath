@@ -28,7 +28,11 @@
 	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-lmdb.jar"/>
 	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-lz4.jar"/>
 	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-meow.jar"/>
-	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-nanovg.jar"/>
+	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-nanovg.jar" sourcepath="LWJGL3_lib/src/lwjgl-nanovg-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/WorldBuilder/LWJGL3_lib/javadoc/lwjgl-nanovg-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-nfd.jar"/>
 	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-nuklear.jar"/>
 	<classpathentry kind="lib" path="LWJGL3_lib/jars/lwjgl-odbc.jar"/>

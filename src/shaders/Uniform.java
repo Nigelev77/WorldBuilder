@@ -1,7 +1,5 @@
 package shaders;
 
-import org.lwjgl.opengl.GL20;
-
 public class Uniform<Type> {
 	
 	Type type;

@@ -16,7 +16,6 @@ public class Vbo {
 	private int vertexCount;
 	private int size;
 	private int totalFloats;
-	private static final int FLOAT = 4;
 	
 	public Vbo(int[] indices, int[] dimensions, float[]...data) {
 		

@@ -8,7 +8,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 
 import engine.RenderEngine;
-import player.Camera;
 
 public class TerrainRenderer {
 	
@@ -54,7 +53,7 @@ public class TerrainRenderer {
 	
 	private void prepareTerrain(Terrain terrain) {
 		GL30.glBindVertexArray(terrain.getVao());
-		shader.transform.loadValue(terrain.getTranform(), shader);
+		shader.transform.loadValue(terrain.getTransform(), shader);
 		shader.lightPos.loadValue(RenderEngine.getLight().getPosition(), shader);
 	}
 }

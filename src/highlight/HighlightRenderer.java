@@ -15,6 +15,8 @@ public class HighlightRenderer {
 	private StaticModelShader normalShader;
 	private HighlightShader shader;
 	
+	private static final float scale = 1.1f;
+	
 	private Matrix4f projection;
 	
 	public HighlightRenderer(Matrix4f projection) {
@@ -24,7 +26,7 @@ public class HighlightRenderer {
 		shader.Start();
 		shader.Stop();
 		normalShader.Start();
-		normalShader.projectionMatrix.loadValue(projection, normalShader);
+
 		normalShader.Stop();
 	}
 	
@@ -49,7 +51,6 @@ public class HighlightRenderer {
 	 * -Takes in the view matrix in order to draw the highlighted box around the object which was rendered in {@linkplain}firstRender
 	 */
 	private void secondRender(Matrix4f view) {
-		float scale = 1.2f;
 		prepareSecond();
 		for(StaticEntity entity: RenderEngine.getHighlighted()) {
 			prepareHighlight(entity, view, scale);
@@ -60,7 +61,7 @@ public class HighlightRenderer {
 	
 	private void endFirstRendering() {
 		GL30.glBindVertexArray(0);
-		shader.Stop();
+		normalShader.Stop();
 	}
 	
 	private void endSecondRendering() {
@@ -68,12 +69,13 @@ public class HighlightRenderer {
 		GL30.glStencilMask(0xFF);
 		GL30.glStencilFunc(GL11.GL_ALWAYS, 1, 0xFF);
 		GL30.glEnable(GL11.GL_DEPTH_TEST);
+		shader.Stop();
 	}
 	
 	private void prepareFirst(Vector3f lightPos) {
 		normalShader.Start();
-		GL30.glEnable(GL11.GL_STENCIL_TEST);
-		GL30.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT | GL11.GL_STENCIL_BUFFER_BIT);
+		GL30.glEnable(GL11.GL_DEPTH_TEST);
+		normalShader.projectionMatrix.loadValue(projection, normalShader);
 		normalShader.lightPos.loadValue(lightPos, normalShader);
 		prepareStencil();
 	}
@@ -83,6 +85,7 @@ public class HighlightRenderer {
 		GL11.glStencilFunc(GL11.GL_NOTEQUAL, 1, 0xFF);
 		GL11.glStencilMask(0x00);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL11.glDisable(GL11.GL_CULL_FACE);
 	}
 	
 	private void prepareStencil() {
@@ -93,18 +96,23 @@ public class HighlightRenderer {
 	
 	private void prepareHighlight(StaticEntity entity, Matrix4f view, float scale) {
 		GL30.glBindVertexArray(entity.getVaoID());
-		Matrix4f translation = Maths.createTransformMatrix(entity.getPosition(), entity.getRotation().x, entity.getRotation().y,
-				entity.getRotation().z, entity.getScale()*scale);
-		translation.mul(view);
-		translation.mul(projection);
-		shader.mvp.loadValue(translation, shader);
+//		Matrix4f translation = Maths.createTransformMatrix(entity.getPosition(), entity.getRotation().x, entity.getRotation().y,
+//				entity.getRotation().z, entity.getScale()*scale);
+//		translation.mul(view);
+//		translation.mul(projection);
+//		
+		Matrix4f newMvp = new Matrix4f().identity();
+		newMvp.mul(projection);
+		newMvp.mul(view);
+		newMvp.mul(Maths.createTransformMatrix(entity.getPosition(), entity.getRotation().x, entity.getRotation().y,
+				entity.getRotation().z, entity.getScale()*scale));
+		shader.mvp.loadValue(newMvp, shader);
 	}
 	
 	private void prepareEntity(StaticEntity entity, Matrix4f view) {
 		GL30.glBindVertexArray(entity.getVaoID());
+		normalShader.transform.loadValue(entity.getTransformMatrix(), normalShader);
 		normalShader.viewMatrix.loadValue(view, normalShader);
-		normalShader.transform.loadValue(Maths.createTransformMatrix(entity.getPosition(), entity.getRotation().x, entity.getRotation().y,
-				entity.getRotation().z, entity.getScale()), normalShader);
 		
 	}
 	

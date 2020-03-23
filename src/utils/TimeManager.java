@@ -7,13 +7,11 @@ public class TimeManager {
 	private float currentTime;
 	private float lastTime;
 	private float delta;
-	private long resolution;
 	
 	public TimeManager() {
 		currentTime = (float) GLFW.glfwGetTime();
 		lastTime = currentTime;
 		delta = 0;
-		resolution = (long) GLFW.glfwGetTime();
 	}
 	
 	public void update() {

@@ -16,7 +16,7 @@ public class PeripheralController {
 	public PeripheralController(Window window) {
 		keyboard = new KeyboardController();
 		mouse = new MouseController();
-		this.window=window;
+		PeripheralController.window=window;
 	}
 	
 	public GLFWKeyCallback getKeyboard() {

@@ -19,7 +19,7 @@ public class Terrain {
 	private float[] normals = new float[VERTICES*VERTICES*3];
 	private int[] indices = new int[6*BOXES*BOXES];
 	private Vao mesh;
-	private Matrix4f transformation;
+
 	
 	
 	public Terrain(int x, int z) {
@@ -75,7 +75,7 @@ public class Terrain {
 	}
 	
 	
-	public Matrix4f getTranform() {
+	public Matrix4f getTransform() {
 		return Maths.createTransformMatrix(new Vector3f(x, 0, z), 0, 0, 0, 1);
 	}
 	
