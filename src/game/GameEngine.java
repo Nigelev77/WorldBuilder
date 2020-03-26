@@ -1,10 +1,13 @@
 package game;
 
+
+
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 import display.WindowManager;
 import engine.RenderEngine;
+
 import gui.GUIMasterRenderer;
 import player.Camera;
 import selectors.MouseSelector;
@@ -27,6 +30,7 @@ public class GameEngine implements Runnable{
 	
 	public static MouseSelector selector = new MouseSelector();
 	
+	
 	public GameEngine() {
 		
 		windows = new WindowManager();
@@ -42,19 +46,11 @@ public class GameEngine implements Runnable{
 		camera = new Camera();
 		startGameLoop();
 		while(!GLFW.glfwWindowShouldClose(windows.getWindowNum())) {
-			synchronized(camera) {
-				if(!camera.moved) {
-					camera.move();
-				}
-				selector.update(Maths.setViewMatrix(camera));
-			}
-
+			selector.update(Maths.setViewMatrix(camera));
 			GLFW.glfwWaitEvents();
 		}
-		synchronized(GameEngine.glfwLock) {
-			isRunning = false;
-			windows.destroy();
-		}
+		isRunning = false;
+		windows.destroy();
 	}
 	private void startGameLoop() {
 		gameLoopThread.start();
@@ -72,7 +68,7 @@ public class GameEngine implements Runnable{
 	private void gameLoop() {
 		setup();
 		while(GameEngine.isRunning) {
-			
+			camera.move();
 			windows.update();
 		}
 		cleanUp();
@@ -98,5 +94,5 @@ public class GameEngine implements Runnable{
 	private void cleanUp() {
 		RenderEngine.cleanUp();
 	}
-
+	
 }

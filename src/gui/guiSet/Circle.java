@@ -28,14 +28,13 @@ public class Circle implements CircularGUI{
 		cy = y;
 		
 	}
-
+	
+	/**
+	 * Remember to use Nanovg.nvgBeginPath as this will only draw it, not start the path.
+	 */
 	@Override
 	public void render(long ccx) {
-		NanoVG.nvgBeginPath(ccx);
 		NanoVG.nvgArc(ccx, cx, cy, radius, (float)Math.toRadians(0f), (float)Math.toRadians(360f), NanoVG.NVG_CCW);
-		gradient.setGradient(ccx, cx, cy, 30, radius);
-		
-		NanoVG.nvgClosePath(ccx);	
 		
 	}
 
@@ -52,5 +51,22 @@ public class Circle implements CircularGUI{
 	
 	public void setEndColor(int r, int g, int b, int a) {
 		gradient.changeEndColor(r, r, b, a);
+	}
+	
+	public void changePos(float x, float y) {
+		cx+=x;
+		cy+=y;
+	}
+	
+	public float getX() {
+		return this.cx;
+	}
+	public float getY() {
+		return this.cy;
+	}
+
+	@Override
+	public void update() {
+		
 	}
 }

@@ -8,6 +8,7 @@ import org.lwjgl.nanovg.NanoVGGL3;
 
 import display.WindowManager;
 import gui.guiSet.Circle;
+import gui.guiSet.Slider;
 
 public class GUIMasterRenderer {
 	
@@ -18,6 +19,7 @@ public class GUIMasterRenderer {
 	private static NVGColor color2 = NVGColor.create();
 	private static NVGPaint paint = NVGPaint.create();
 	private static Circle circle;
+	public static Slider slider;
 	
 	public static void init() {
 		NanoVGInstance = NanoVGGL3.nvgCreate(NanoVGGL3.NVG_DEBUG|NanoVGGL3.NVG_ANTIALIAS|NanoVGGL3.NVG_STENCIL_STROKES);
@@ -27,7 +29,7 @@ public class GUIMasterRenderer {
 		circle = new Circle(700, 800, 50);
 		circle.setStartColor(140, 100, 50, 240);
 		circle.setEndColor(10, 50, 200, 50);
-		
+		slider = new Slider(800, 300, 250, 10);
 	}
 	
 	public static void render() {
@@ -36,8 +38,8 @@ public class GUIMasterRenderer {
 			NanoVG.nvgBeginFrame(NanoVGInstance, 1600, 900, WindowManager.aspectRatio);
 			NanoVG.nvgSave(NanoVGInstance);
 			drawMenu();
-			circle.render(NanoVGInstance);
 			drawSlider();
+			slider.render(NanoVGInstance);
 			NanoVG.nvgRestore(NanoVGInstance);
 			NanoVG.nvgEndFrame(NanoVGInstance);
 

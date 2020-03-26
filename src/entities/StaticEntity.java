@@ -26,6 +26,8 @@ public class StaticEntity extends Entity{
 	public int getVaoID() {
 		return vaoID;
 	}
-	
+	public void move(Vector3f translation) {
+		position.add(translation);
+	}
 	
 }

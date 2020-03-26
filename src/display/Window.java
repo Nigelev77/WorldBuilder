@@ -66,10 +66,8 @@ public class Window {
 		}
 		RenderEngine.render();
 		GUIMasterRenderer.render();
-		synchronized(GameEngine.glfwLock) {
-			if(GameEngine.isRunning) {
-				swapBuffers();
-			}
+		if(GameEngine.isRunning) {
+			swapBuffers();
 		}
 		WindowManager.time.update();
 		setFPS();

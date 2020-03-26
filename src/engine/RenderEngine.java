@@ -16,6 +16,7 @@ public class RenderEngine {
 	
 	private static MasterRenderer renderer;
 	private static MasterLoader loader;
+	public static boolean rendering = false;
 	
 	private static List<StaticEntity> staticEntities = new ArrayList<StaticEntity>();
 	
