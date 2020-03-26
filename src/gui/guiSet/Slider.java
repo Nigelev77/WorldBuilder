@@ -26,7 +26,7 @@ public class Slider implements GUI{
 		value = (value+x) % 100;
 		knob.setCenter(slider.getX()+slider.getWidth()*(value/100f), knob.getY());
 	}
-	
+
 	public void changeKnobPosition(float x) {
 		float startbounds = slider.getX();
 		float endbounds = slider.getWidth()+slider.getX();
