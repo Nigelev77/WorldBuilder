@@ -10,7 +10,7 @@ import utils.Maths;
 
 public class TerrainManager {
 	
-	protected static final int VERTICES = 128;
+	protected static final int VERTICES = 64;
 	private static int BOXES = VERTICES-1;
 	protected static int SIZE = 128;
 	

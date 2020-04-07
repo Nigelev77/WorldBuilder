@@ -9,7 +9,7 @@ public class Chunk {
 	
 	protected static Matrix4f inverseTransform = new Matrix4f().identity();
 	private static float ChunkSize = TerrainManager.SIZE/TerrainManager.VERTICES;
-	private static final float intensity = 1f;
+	private static final float intensity = 1/100f;
 	
 	private Vector3f[] vertices;
 	public float x, z;
