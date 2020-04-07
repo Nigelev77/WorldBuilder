@@ -57,10 +57,10 @@ public class Window {
 	}
 	
 	public void update() {
-//		if(resized) {
-//			GL11.glViewport(0, 0, width, height);
-//			setResized(false);
-//		}
+		if(resized) {
+			GL11.glViewport(0, 0, width, height);
+			setResized(false);
+		}
 		if(WindowManager.shouldClose) {
 			GLFW.glfwSetWindowShouldClose(window, true);
 		}

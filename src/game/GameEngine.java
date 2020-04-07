@@ -12,6 +12,7 @@ import gui.GUIMasterRenderer;
 import player.Camera;
 import selectors.MouseSelector;
 import terrain.TerrainRenderer;
+import terrainManager.TerrainManager;
 import utils.Maths;
 
 public class GameEngine implements Runnable{
@@ -47,6 +48,7 @@ public class GameEngine implements Runnable{
 		startGameLoop();
 		while(!GLFW.glfwWindowShouldClose(windows.getWindowNum())) {
 			selector.update(Maths.setViewMatrix(camera));
+			camera.move();
 			GLFW.glfwWaitEvents();
 		}
 		isRunning = false;
@@ -68,7 +70,7 @@ public class GameEngine implements Runnable{
 	private void gameLoop() {
 		setup();
 		while(GameEngine.isRunning) {
-			camera.move();
+//			camera.move();
 			windows.update();
 		}
 		cleanUp();
@@ -81,6 +83,9 @@ public class GameEngine implements Runnable{
 		RenderEngine.loadStaticModel("person");
 		RenderEngine.loadStaticModel("barrel");
 		TerrainRenderer.addTerrain(0, 0);
+		TerrainManager manager = new TerrainManager();
+		manager.generateMesh();
+		TerrainRenderer.loadTerrainManager(manager);
 		RenderEngine.addStaticEntity(new Vector3f(100f,0f,-150f), new Vector3f().zero(), 1, "cube");
 		RenderEngine.addStaticEntity(new Vector3f(200f, 0f, -250f), new Vector3f().zero(), 2, "cube");
 		RenderEngine.addStaticEntity(new Vector3f(300f,0f,-350f), new Vector3f().zero(), 3, "cube");

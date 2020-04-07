@@ -54,7 +54,6 @@ public class MouseController{
 				
 				mouse.x=xpos;
 				mouse.y=ypos;
-				GUISelector.update();
 			}
 		};
 	}
@@ -82,5 +81,8 @@ public class MouseController{
 		return new Vector2f((float) mouse.x, (float) mouse.y);
 	}
 	
+	public static boolean queryMouseButton(int button) {
+		return GLFW.glfwGetMouseButton(PeripheralController.window.getWindow(), button)==GLFW.GLFW_PRESS;
+	}
 
 }

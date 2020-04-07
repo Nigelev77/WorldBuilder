@@ -1,13 +1,16 @@
 package gui.guiSet;
 
+import org.joml.Vector2f;
 import org.lwjgl.nanovg.NanoVG;
 
 import gui.ColorManager;
 import gui.GUI;
+import gui.GUIItem;
 import gui.LinearGradient;
 import gui.RadialGradient;
+import io.MouseController;
 
-public class Slider implements GUI{
+public class Slider extends GUI implements GUIItem{
 	
 	private Circle knob;
 	private Rect slider;
@@ -30,8 +33,9 @@ public class Slider implements GUI{
 	public void changeKnobPosition(float x) {
 		float startbounds = slider.getX();
 		float endbounds = slider.getWidth()+slider.getX();
-		if(x>startbounds && x<endbounds) {
+		if(x>=startbounds && x<=endbounds) {
 			knob.setCenter(x, knob.getY());
+			value = (knob.getX()-slider.getX())/slider.getWidth();
 		}
 
 	}
@@ -54,7 +58,9 @@ public class Slider implements GUI{
 		NanoVG.nvgFillColor(ccx, ColorManager.assignColors(70, 10, 200, 255, ColorManager.color1));
 		NanoVG.nvgFill(ccx);
 		NanoVG.nvgClosePath(ccx);
-		
+		NanoVG.nvgBeginPath(ccx);
+		NanoVG.nvgTextBox(ccx, slider.getX()+slider.getHeight()+20f, slider.getY(), 100, Float.toString(value));
+		NanoVG.nvgClosePath(ccx);
 	}
 	
 	public float getKnobX() {
@@ -68,7 +74,27 @@ public class Slider implements GUI{
 	public float getknobRadius() {
 		return 10f;
 	}
-	public GUI getKnob() {
-		return (GUI) knob;
+	public GUIItem getKnob() {
+		return (GUIItem) knob;
+	}
+
+	@Override
+	public void interact() {
+		Vector2f mousePosition = MouseController.queryMousePos();
+		changeKnobPosition(mousePosition.x);
+		
+	}
+
+
+
+	@Override
+	public boolean checkBoundaries(float x, float y) {
+		float knobX = knob.getX();
+		float knobY = knob.getY();
+		float r = getknobRadius();
+		if(x>=knobX-r && x<=knobX+r && y>=knobY- r && y<=knobY+r) {
+			return true;
+		}
+		return false;
 	}
 }

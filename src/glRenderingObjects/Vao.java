@@ -52,4 +52,12 @@ public class Vao {
 		GL30.glBindVertexArray(0);
 		GL30.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 	}
+	/*
+	 * Need to update this so that I can store in the masterbuffer whenever the vertexBuffer is updated ONLY
+	 */
+//	public void storeAttributeList(int index, float[] data) {
+//		GL30.glBindVertexArray(vaoID);
+//		GL30.glBindBuffer(GL30.GL_ARRAY_BUFFER, vbo.getVboID());
+//		GL30.glVertexAttribPointer(index, size, GL11.GL_FLOAT, false, vbo.getSize(), 0);
+//	}
 }

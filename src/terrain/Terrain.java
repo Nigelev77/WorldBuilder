@@ -26,7 +26,6 @@ public class Terrain {
 		this.x = x;
 		this.z = z;
 		calculateMesh();
-		System.out.println("oh no");
 		
 	}
 	

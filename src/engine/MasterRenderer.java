@@ -44,8 +44,8 @@ public class MasterRenderer {
 	public void render(Camera camera) {
 		Matrix4f viewMatrix = Maths.setViewMatrix(camera);
 		renderStatics(viewMatrix);
-		//terrainRenderer.render(viewMatrix);
-		//highlightRenderer.render(viewMatrix, RenderEngine.getLight().getPosition());
+		terrainRenderer.render(viewMatrix);
+		highlightRenderer.render(viewMatrix, RenderEngine.getLight().getPosition());
 	}
 	
 	

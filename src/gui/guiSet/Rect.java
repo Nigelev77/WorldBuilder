@@ -3,10 +3,10 @@ package gui.guiSet;
 import org.lwjgl.nanovg.NanoVG;
 
 import gui.ColorManager;
-import gui.GUI;
+import gui.GUIItem;
 import gui.LinearGradient;
 
-public class Rect implements GUI {
+public class Rect implements GUIItem {
 
 	private float x, y, w, h;
 	
@@ -36,6 +36,13 @@ public class Rect implements GUI {
 	public float getX() {
 		return x;
 	}
-
+	
+	public float getY() {
+		return y;
+	}
+	
+	public float getHeight() {
+		return h;
+	}
 	
 }

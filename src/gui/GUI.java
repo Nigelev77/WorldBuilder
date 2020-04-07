@@ -1,10 +1,11 @@
 package gui;
 
-
-public interface GUI{
+public abstract class GUI {
 	
-	public static final float cornerRadius = 20f;
+	protected boolean inFocus = false;
+	protected boolean mouseOver = false;
 	
-	public void setPosition(float x, float y);
-	void render(long ccx);
+	
+	public abstract void interact();
+	public abstract boolean checkBoundaries(float x, float y);
 }

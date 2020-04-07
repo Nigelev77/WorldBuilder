@@ -1,11 +1,7 @@
 package selectors;
 
-import org.joml.Vector2f;
-
 import gui.GUI;
 import gui.GUIMasterRenderer;
-import gui.guiSet.Slider;
-import io.MouseController;
 
 public class GUISelector {
 	
@@ -16,11 +12,10 @@ public class GUISelector {
 	}
 	
 	public static void checkGUI(float x, float y) {
-		float radius = GUIMasterRenderer.slider.getknobRadius();
-		float knobX = GUIMasterRenderer.slider.getKnobX();
-		float knobY = GUIMasterRenderer.slider.getKnobY();
-		if(x>=knobX-radius && x<=knobX+radius && y>=knobY-radius && y<=knobY+radius) {
-			selectedGUI = GUIMasterRenderer.slider;
+		for(GUI gui:GUIMasterRenderer.guis) {
+			if(gui.checkBoundaries(x, y)) {
+				selectedGUI=gui;
+			}
 		}
 	}
 	
@@ -30,8 +25,7 @@ public class GUISelector {
 	
 	public static void update() {
 		if(selectedGUI!=null) {
-			Vector2f mousePosition = MouseController.queryMousePos();
-			((Slider) selectedGUI).changeKnobPosition(mousePosition.x);
+			selectedGUI.interact();
 		}
 	}
 }
