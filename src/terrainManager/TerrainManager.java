@@ -5,7 +5,7 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import game.GameEngine;
-import glRenderingObjects.Vao;
+import glRenderingObjects.ModelVao;
 import utils.Maths;
 
 public class TerrainManager {
@@ -22,7 +22,7 @@ public class TerrainManager {
 	private Vector2f[] textureCoords = new Vector2f[VERTICES*VERTICES];
 	private Vector3f[] normals = new Vector3f[VERTICES*VERTICES];
 	private int[] indices = new int[6*BOXES*BOXES];
-	private Vao mesh;
+	private ModelVao mesh;
 	
 	private Chunk[] chunks = new Chunk[BOXES*BOXES];
 	
@@ -69,7 +69,7 @@ public class TerrainManager {
 		}
 		changeChunkHeight();
 		showChunks();
-		this.mesh = new Vao();
+		this.mesh = new ModelVao();
 		loadData();
 		this.mesh.storeData(indices, new int[]{3, 2, 3}, vertexArray, textureCoordsArray, normalsArray);
 		updateMesh();

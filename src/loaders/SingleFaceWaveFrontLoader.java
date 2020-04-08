@@ -11,12 +11,12 @@ import java.util.List;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
-import glRenderingObjects.Vao;
+import glRenderingObjects.ModelVao;
 
 public class SingleFaceWaveFrontLoader {
 	
 	
-	public static Vao loadEntity(String fileName) {
+	public static ModelVao loadEntity(String fileName) {
 		List<Vector3f> vertices = new ArrayList<Vector3f>();
 		List<Vector2f> textureCoords = new ArrayList<Vector2f>();
 		List<Vector3f> normals = new ArrayList<Vector3f>();
@@ -80,9 +80,9 @@ public class SingleFaceWaveFrontLoader {
 		}
 		
 		int[] dimensions = {3,2,3};
-		Vao vao = new Vao();
-		vao.storeData(indicesArr, dimensions, verticesArr, textureCoordsArr, normalsArr);
-		return vao;
+		ModelVao modelVao = new ModelVao();
+		modelVao.storeData(indicesArr, dimensions, verticesArr, textureCoordsArr, normalsArr);
+		return modelVao;
 		
 	}
 	

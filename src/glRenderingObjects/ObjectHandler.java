@@ -10,11 +10,11 @@ public class ObjectHandler {
 	public static List<Integer> vaos = new ArrayList<Integer>();
 	public static List<Integer> vbos = new ArrayList<Integer>();
 	
-	public static void addVao(Vao vao) {
-		vaos.add(vao.getVaoID());
+	public static void addVao(Vao modelVao) {
+		vaos.add(modelVao.getVaoID());
 	}
-	public static void addVbo(Vbo vbo) {
-		vbos.add(vbo.getVboID());
+	public static void addVbo(Vbo modelVbo) {
+		vbos.add(modelVbo.getVboID());
 	}
 	
 	public static void cleanUp() {

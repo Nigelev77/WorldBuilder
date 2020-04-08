@@ -33,7 +33,9 @@ public class TerrainRenderer {
 	}
 	
 	public void render(Matrix4f viewMatrix) {
+		GL30.glPolygonMode(GL30.GL_FRONT_AND_BACK, GL30.GL_LINE);
 		prepare(viewMatrix);
+		
 		/*
 		for(Terrain terrain:terrains) {
 			prepareTerrain(terrain);
@@ -47,7 +49,7 @@ public class TerrainRenderer {
 		shader.lightPos.loadValue(RenderEngine.getLight().getPosition(), shader);
 		GL30.glDrawElements(GL11.GL_TRIANGLES, manager.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
 		endRendering();
-		
+		GL30.glPolygonMode(GL30.GL_FRONT_AND_BACK, GL30.GL_FILL);
 	}
 	
 	private void endRendering() {

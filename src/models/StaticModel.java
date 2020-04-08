@@ -1,23 +1,23 @@
 package models;
 
-import glRenderingObjects.Vao;
+import glRenderingObjects.ModelVao;
 
 public class StaticModel {
 	
-	private Vao vao;
+	private ModelVao modelVao;
 	private String name;
 	
-	public StaticModel(Vao vao, String name) {
-		this.vao = vao;
+	public StaticModel(ModelVao modelVao, String name) {
+		this.modelVao = modelVao;
 		this.name = name;
 	}
 	
 	public int getVaoId() {
-		return vao.getVaoID();
+		return modelVao.getVaoID();
 	}
 	
 	public int getVertexCount() {
-		return vao.getVertexCount();
+		return modelVao.getVertexCount();
 	}
 
 	public String getName() {

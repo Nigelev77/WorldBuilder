@@ -3,7 +3,7 @@ package terrain;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-import glRenderingObjects.Vao;
+import glRenderingObjects.ModelVao;
 import utils.Maths;
 
 public class Terrain {
@@ -18,7 +18,7 @@ public class Terrain {
 	private float[] textureCoords = new float[VERTICES*VERTICES*2];
 	private float[] normals = new float[VERTICES*VERTICES*3];
 	private int[] indices = new int[6*BOXES*BOXES];
-	private Vao mesh;
+	private ModelVao mesh;
 
 	
 	
@@ -60,7 +60,7 @@ public class Terrain {
 				
 			}
 		}
-		this.mesh = new Vao();
+		this.mesh = new ModelVao();
 		mesh.storeData(indices, new int[] {3, 2, 3}, vertices, textureCoords, normals);
 		
 	}

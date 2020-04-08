@@ -8,7 +8,7 @@ import org.joml.Vector3f;
 import entities.Light;
 import entities.StaticEntity;
 import game.GameEngine;
-import glRenderingObjects.Vao;
+import glRenderingObjects.ModelVao;
 import loaders.MasterLoader;
 import models.StaticModel;
 
@@ -38,7 +38,7 @@ public class RenderEngine {
 	public static void loadStaticModel(String fileName) {
 		StaticModel model = loader.renderStaticModel(fileName);
 		renderer.loadStaticModel(model);
-		Vao vao = new Vao();
+		ModelVao modelVao = new ModelVao();
 		float[] vertices = {
 				-0.5f, 0.5f, 0f,//v0
 				-0.5f, -0.5f, 0f,//v1
@@ -50,8 +50,8 @@ public class RenderEngine {
 				3,1,2//bottom right triangle (v3, v1, v2)
 		};
 		int[] dimensions = {3};
-		vao.storeData(indices, dimensions, vertices);
-		StaticModel rect = new StaticModel(vao, "rect");
+		modelVao.storeData(indices, dimensions, vertices);
+		StaticModel rect = new StaticModel(modelVao, "rect");
 		renderer.loadStaticModel(rect);
 		
 		
