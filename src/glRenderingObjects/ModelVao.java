@@ -7,11 +7,9 @@ import org.lwjgl.opengl.GL30;
 
 public class ModelVao extends Vao{
 	
-	private int vaoID;
 	private int vertexCount;
 	private ModelVbo modelVbo;
 	
-	private static int FLOAT_SIZE = 4;
 	
 	public ModelVao() {
 		vaoID = GL30.glGenVertexArrays();
@@ -46,7 +44,7 @@ public class ModelVao extends Vao{
 		GL30.glBindBuffer(GL15.GL_ARRAY_BUFFER, modelVbo.getVboID());
 		int offset = 0;
 		for(int i = 0;i<dimensions.length;i++) {
-			GL20.glVertexAttribPointer(i, dimensions[i], GL11.GL_FLOAT, false, modelVbo.getSize()*ModelVao.FLOAT_SIZE, offset*ModelVao.FLOAT_SIZE);
+			GL20.glVertexAttribPointer(i, dimensions[i], GL11.GL_FLOAT, false, modelVbo.getSize()*FLOAT_SIZE, offset*FLOAT_SIZE);
 			offset+=dimensions[i];
 		}
 		GL30.glBindVertexArray(0);

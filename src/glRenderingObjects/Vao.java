@@ -7,18 +7,18 @@ public abstract class Vao {
 	protected int vaoID;
 	private int vertexCount;
 	
-	private static int FLOAT_SIZE = 4;
+	protected static int FLOAT_SIZE = 4;
 
 	public Vao() {
 		vaoID = GL30.glGenVertexArrays();
 		ObjectHandler.addVao(this);
 	}
 
-	protected int getVaoID() {
+	public int getVaoID() {
 		return vaoID;
 	}
 
-	protected int getVertexCount() {
+	public int getVertexCount() {
 		return vertexCount;
 	}
 
